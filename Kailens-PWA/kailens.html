@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#00C2B2">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="KaiLens">
+<title>KaiLens</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+:root{
+  --teal:#00C2B2;--teal-dim:#E0FAF8;--teal-dark:#007A72;
+  --bg:#FFF8F0;--card:#FFFFFF;--card2:#FDF5EC;--txt:#1A1A2E;--muted:#9B8EA8;--border:#EDE8F5;
+  --green:#00B894;--green-bg:#E0FAF5;--coral:#FF6B6B;--coral-bg:#FFF0F0;
+  --amber:#FF9F43;--amber-bg:#FFF4E6;--red:#FF6B6B;--red-bg:#FFF0F0;
+}
+html,body{height:100%;background:#c8ede9;font-family:'Nunito',sans-serif;color:var(--txt)}
+#app{width:100%;max-width:430px;min-height:100vh;margin:0 auto;background:var(--bg);position:relative;overflow:hidden;display:flex;flex-direction:column}
+.screen{display:none;flex-direction:column;min-height:100vh;animation:slideIn 0.28s cubic-bezier(0.4,0,0.2,1)}
+.screen.active{display:flex}
+@keyframes slideIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}
+@keyframes slideUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeInBubble{from{opacity:0;transform:translate(-50%,-50%) scale(0.7)}to{opacity:1;transform:translate(-50%,-50%) scale(1)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+@keyframes scanLine{0%{top:10%}50%{top:75%}100%{top:10%}}
+@keyframes celebrate{0%{transform:scale(1)}40%{transform:scale(1.15)}100%{transform:scale(1)}}
+@keyframes loadBar{from{width:0}to{width:100%}}
+.ss{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.ss::-webkit-scrollbar{display:none}
+.bbl{width:36px;height:36px;border-radius:50%;background:var(--card2);border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0}
+.bb{width:36px;height:36px;border-radius:50%;background:rgba(0,0,0,0.38);border:1px solid rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0}
+.bp{background:var(--teal);color:#fff;border:none;border-radius:16px;padding:15px 20px;font-size:15px;font-weight:700;cursor:pointer;font-family:'Fredoka',sans-serif;width:100%;transition:opacity .15s,transform .12s}
+.bp:active{opacity:.85;transform:scale(.98)}
+.bo{background:transparent;color:var(--teal);border:2px solid var(--teal);border-radius:16px;padding:14px 20px;font-size:15px;font-weight:700;cursor:pointer;font-family:'Fredoka',sans-serif;width:100%}
+.pill{display:inline-flex;align-items:center;gap:4px;border-radius:999px;padding:5px 11px;font-size:11px;font-weight:700}
+/* HOME */
+.htop{padding:20px 20px 0;display:flex;justify-content:space-between;align-items:center}
+.hlogo{display:flex;align-items:center;gap:8px}
+.hlogo span{font-family:'Fredoka',sans-serif;font-size:22px;font-weight:700;color:var(--txt)}
+.hero{margin:14px 20px 0;border-radius:24px;padding:22px 20px 20px;background:linear-gradient(135deg,#00C2B2,#48DBBB);position:relative;overflow:hidden;cursor:pointer}
+.hero-bg{position:absolute;right:-12px;bottom:-12px;font-size:90px;opacity:.12;pointer-events:none}
+.hero h2{font-family:'Fredoka',sans-serif;font-size:22px;font-weight:700;color:#fff;line-height:1.3;margin-bottom:6px}
+.hero p{font-size:12px;color:rgba(255,255,255,.82);margin-bottom:18px;line-height:1.5}
+.hero-btn{background:#fff;color:var(--teal-dark);border:none;border-radius:12px;padding:10px 18px;font-size:13px;font-weight:800;cursor:pointer;font-family:'Fredoka',sans-serif}
+.qrow{display:flex;gap:10px;padding:14px 20px 0}
+.qcard{flex:1;background:var(--card);border-radius:18px;border:1.5px solid var(--border);padding:14px 12px;cursor:pointer;transition:transform .15s}
+.qcard:active{transform:scale(.97)}
+.qicon{width:38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:9px}
+.qlabel{font-family:'Fredoka',sans-serif;font-size:14px;font-weight:700;color:var(--txt)}
+.qsub{font-size:10px;color:var(--muted);margin-top:2px}
+.slabel{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;padding:18px 20px 10px}
+.rrow{display:flex;align-items:center;gap:12px;padding:12px 20px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .15s}
+.rrow:active{background:var(--card2)}
+.remoji{width:46px;height:46px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0}
+.rmeta{flex:1}
+.rtitle{font-size:13px;font-weight:700;color:var(--txt)}
+.rsub{font-size:11px;color:var(--muted);margin-top:2px}
+.mpill{font-size:10px;font-weight:700;padding:4px 9px;border-radius:8px;white-space:nowrap}
+/* IMPORT */
+.ihead{padding:20px 20px 0;display:flex;align-items:center;gap:12px;margin-bottom:22px}
+.ititle{font-family:'Fredoka',sans-serif;font-size:20px;font-weight:700;color:var(--txt)}
+.isub{font-size:12px;color:var(--muted);margin-top:2px}
+.urlbox{margin:0 20px 10px;background:var(--card);border:2px solid var(--border);border-radius:14px;padding:13px 16px;display:flex;align-items:center;gap:10px;transition:border-color .2s}
+.urlbox:focus-within{border-color:var(--teal)}
+.urlbox input{flex:1;background:transparent;border:none;outline:none;font-size:13px;color:var(--txt);font-family:'Nunito',sans-serif}
+.urlbox input::placeholder{color:var(--muted)}
+.tipbox{margin:0 20px 18px;background:var(--teal-dim);border:1px solid rgba(0,194,178,.3);border-radius:14px;padding:12px 14px;display:flex;gap:10px;align-items:flex-start}
+.tipicon{width:26px;height:26px;background:var(--teal);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;color:#fff;font-weight:800}
+.tiptext{font-size:11px;color:var(--teal-dark);line-height:1.6}
+.ordiv{text-align:center;font-size:11px;color:var(--muted);margin:16px 0;position:relative}
+.ordiv::before,.ordiv::after{content:'';position:absolute;top:50%;width:36%;height:1px;background:var(--border)}
+.ordiv::before{left:20px}.ordiv::after{right:20px}
+.chip{background:var(--card);border:1.5px solid var(--border);border-radius:999px;padding:8px 14px;font-size:12px;font-weight:600;color:var(--txt);cursor:pointer;display:flex;align-items:center;gap:6px;transition:all .15s}
+.chip:active{border-color:var(--teal);color:var(--teal);background:var(--teal-dim)}
+/* EXTRACTING */
+#s-extracting{align-items:center;justify-content:center;padding:40px 24px;text-align:center}
+.espin{width:72px;height:72px;border-radius:22px;background:linear-gradient(135deg,#00C2B2,#48DBBB);display:flex;align-items:center;justify-content:center;font-size:30px;margin:0 auto 24px;animation:pulse 1.4s ease infinite}
+.etitle{font-family:'Fredoka',sans-serif;font-size:23px;font-weight:700;color:var(--txt);margin-bottom:8px}
+.esub{font-size:13px;color:var(--muted);margin-bottom:32px}
+.esteps{width:100%;text-align:left}
+.estep{display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:13px;margin-bottom:6px;transition:background .3s}
+.estep.done{background:var(--green-bg)}
+.estep.active{background:var(--teal-dim);animation:pulse 1.1s ease infinite}
+.edot{width:26px;height:26px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;color:var(--muted)}
+.estep.done .edot{background:var(--green);border-color:var(--green);color:#fff}
+.estep.active .edot{background:var(--teal);border-color:var(--teal);color:#fff}
+.elabel{font-size:13px;font-weight:600;color:var(--muted)}
+.estep.done .elabel{color:var(--green)}
+.estep.active .elabel{color:var(--teal-dark)}
+/* RECIPE */
+#s-recipe{overflow-y:auto}
+.rhero{padding:22px 20px 16px;display:flex;align-items:flex-start;gap:14px}
+.rebox{width:66px;height:66px;border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:34px;flex-shrink:0}
+.retitle{font-family:'Fredoka',sans-serif;font-size:21px;font-weight:700;color:var(--txt);line-height:1.3}
+.resrc{font-size:11px;color:var(--muted);margin-top:5px}
+.metarow{display:flex;gap:7px;flex-wrap:wrap;padding:0 20px 16px}
+.istats{display:flex;gap:10px;padding:0 20px 16px}
+.istat{flex:1;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:12px;text-align:center}
+.istatnum{font-family:'Fredoka',sans-serif;font-size:24px;font-weight:700;color:var(--txt)}
+.istatlabel{font-size:10px;color:var(--muted);font-weight:600;margin-top:2px}
+.ingcard{margin:0 20px 20px;background:var(--card);border-radius:18px;border:1px solid var(--border);padding:6px 14px}
+.ingrow{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--border)}
+.ingrow:last-child{border-bottom:none}
+.ingbox{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.ingname{font-size:13px;font-weight:700;color:var(--txt)}
+.ingamt{font-size:11px;color:var(--muted);margin-top:1px}
+/* SCAN */
+.scanscreen{background:#090d0c;min-height:100vh;position:relative;overflow:hidden}
+.sambient{position:absolute;inset:0;pointer-events:none}
+.stopbar{position:relative;z-index:20;padding:16px 20px;display:flex;align-items:center;gap:12px}
+.sphase{color:rgba(255,255,255,.65);font-size:12px;font-weight:600}
+.sinstr{position:relative;z-index:20;text-align:center;padding:0 20px 14px}
+.sinstr h3{font-family:'Fredoka',sans-serif;font-size:21px;font-weight:700;color:#fff}
+.sinstr p{font-size:12px;color:rgba(255,255,255,.5);margin-top:4px;line-height:1.5}
+.vf{position:relative;margin:0 20px;border-radius:22px;overflow:hidden;height:250px;background:rgba(255,255,255,.025);border:1.5px solid rgba(0,194,178,.35);z-index:20}
+.vfgrid{position:absolute;inset:0;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr)}
+.vfcell{border:.5px solid rgba(255,255,255,.055)}
+.vfline{position:absolute;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#00C2B2,transparent);box-shadow:0 0 10px rgba(0,194,178,.6);animation:scanLine 2.5s ease-in-out infinite}
+.vfc{position:absolute;width:24px;height:24px}
+.vfc.tl{top:10px;left:10px;border-top:3px solid #00C2B2;border-left:3px solid #00C2B2;border-radius:4px 0 0 0}
+.vfc.tr{top:10px;right:10px;border-top:3px solid #00C2B2;border-right:3px solid #00C2B2;border-radius:0 4px 0 0}
+.vfc.bl{bottom:10px;left:10px;border-bottom:3px solid #00C2B2;border-left:3px solid #00C2B2;border-radius:0 0 0 4px}
+.vfc.br{bottom:10px;right:10px;border-bottom:3px solid #00C2B2;border-right:3px solid #00C2B2;border-radius:0 0 4px 0}
+.vfph{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:52px;opacity:.1}
+.dbubble{position:absolute;transform:translate(-50%,-50%);background:rgba(0,0,0,.78);border-radius:12px;padding:6px 10px;border:1.5px solid rgba(0,194,178,.65);backdrop-filter:blur(8px);display:flex;align-items:center;gap:6px;animation:fadeInBubble .35s ease forwards;z-index:5}
+.bname{color:#fff;font-size:10px;font-weight:700}
+.bconf{color:#00C2B2;font-size:9px}
+.sbottom{position:relative;z-index:20;padding:14px 20px}
+.pdots{display:flex;gap:8px;justify-content:center;margin-bottom:12px}
+.pdot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.2);transition:background .3s}
+.pdot.active{background:#00C2B2}
+.pdot.done{background:rgba(0,194,178,.45)}
+.dcount{text-align:center;font-family:'Fredoka',sans-serif;font-size:15px;font-weight:700;color:#00C2B2;margin-bottom:10px}
+.schips{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;margin-bottom:14px;scrollbar-width:none}
+.schips::-webkit-scrollbar{display:none}
+.schip{flex-shrink:0;background:rgba(0,0,0,.65);border:1px solid rgba(0,194,178,.4);border-radius:10px;padding:5px 10px;display:flex;align-items:center;gap:5px}
+.schip span{color:#fff;font-size:11px;font-weight:600}
+.shutwrap{display:flex;flex-direction:column;align-items:center;gap:8px}
+.shutter{width:66px;height:66px;border-radius:50%;border:3px solid #00C2B2;background:rgba(0,194,178,.15);display:flex;align-items:center;justify-content:center;font-size:28px;cursor:pointer;transition:transform .15s}
+.shutter:active{transform:scale(.9)}
+.shutlabel{color:rgba(255,255,255,.5);font-size:10px;font-weight:600;letter-spacing:.5px}
+.finh{display:none}
+.pvf{border-color:rgba(255,159,67,.35)}
+.pvfl{background:linear-gradient(90deg,transparent,#FF9F43,transparent);box-shadow:0 0 10px rgba(255,159,67,.6)}
+.pvfc{border-color:#FF9F43 !important}
+.pdcount{color:#FF9F43}
+.pschip{border-color:rgba(255,159,67,.4)}
+.pshut{border-color:#FF9F43;background:rgba(255,159,67,.15)}
+.pbubble{border-color:rgba(255,159,67,.65)}
+.pbubble .bconf{color:#FF9F43}
+/* PROCESSING */
+#s-processing{background:#090d0c;align-items:center;justify-content:center;padding:40px 24px;text-align:center}
+.prospin{font-size:52px;margin-bottom:22px;animation:pulse 1.3s ease infinite}
+.protitle{font-family:'Fredoka',sans-serif;font-size:22px;font-weight:700;color:#fff;margin-bottom:8px}
+.prosub{font-size:13px;color:rgba(255,255,255,.45);margin-bottom:32px}
+.proitems{width:100%;text-align:left;display:flex;flex-direction:column;gap:8px}
+.proitem{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:12px}
+.proitem.fri{background:rgba(84,160,255,.1);border:1px solid rgba(84,160,255,.2)}
+.proitem.pan{background:rgba(255,159,67,.1);border:1px solid rgba(255,159,67,.2)}
+.proitemlabel{font-size:12px;color:rgba(255,255,255,.7);font-weight:600;flex:1}
+.proitemcount{font-size:11px;color:#00C2B2;font-weight:700}
+/* MATCH */
+#s-match{overflow-y:auto;padding-bottom:90px}
+.mtopbar{padding:20px 20px 16px;display:flex;align-items:center;gap:12px}
+.mrecname{font-family:'Fredoka',sans-serif;font-size:18px;font-weight:700;color:var(--txt)}
+.mrecsrc{font-size:11px;color:var(--muted);margin-top:2px}
+.mrecicon{width:50px;height:50px;border-radius:15px;display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0}
+.vcard{margin:0 20px 16px;border-radius:20px;padding:18px;display:flex;align-items:center;gap:14px}
+.vcard.cc{background:var(--green-bg);border:2px solid rgba(0,184,148,.25)}
+.vcard.ni{background:var(--amber-bg);border:2px solid rgba(255,159,67,.25)}
+.vemoji{font-size:32px;flex-shrink:0}
+.vmain{font-family:'Fredoka',sans-serif;font-size:17px;font-weight:700}
+.vcard.cc .vmain{color:var(--green)}
+.vcard.ni .vmain{color:var(--amber)}
+.vsub{font-size:12px;color:var(--muted);margin-top:3px}
+.mstats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:0 20px 16px}
+.mstat{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:12px 8px;text-align:center}
+.mstatnum{font-family:'Fredoka',sans-serif;font-size:24px;font-weight:700;color:var(--txt)}
+.mstatlabel{font-size:10px;color:var(--muted);font-weight:600;margin-top:2px}
+.msec{padding:0 20px 14px}
+.msectitle{font-family:'Fredoka',sans-serif;font-size:15px;font-weight:700;color:var(--txt);margin-bottom:10px}
+.ming{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:13px;margin-bottom:6px}
+.ming.have{background:var(--green-bg)}
+.ming.miss{background:var(--red-bg)}
+.mingemoji{font-size:18px;flex-shrink:0}
+.mingname{flex:1;font-size:13px;font-weight:700}
+.ming.have .mingname{color:var(--green)}
+.ming.miss .mingname{color:var(--red)}
+.mingamt{font-size:11px;color:var(--muted)}
+.kaitip{margin:0 20px 16px;background:var(--teal-dim);border:1.5px solid rgba(0,194,178,.35);border-radius:16px;padding:13px 14px;display:flex;gap:10px;align-items:flex-start}
+.kaitiptext{font-size:12px;color:var(--teal-dark);line-height:1.6}
+.msticky{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;background:var(--bg);padding:12px 20px 20px;border-top:1px solid var(--border);z-index:100}
+.cookedbtn{width:100%;background:linear-gradient(135deg,#00C2B2,#48DBBB);border:none;border-radius:16px;padding:16px;font-size:16px;font-weight:700;color:#fff;cursor:pointer;font-family:'Fredoka',sans-serif;transition:opacity .15s,transform .12s;display:flex;align-items:center;justify-content:center;gap:8px}
+.cookedbtn:active{opacity:.85;transform:scale(.98)}
+.cookedbtn.done{background:var(--green)}
+/* COOKED */
+#s-cooked{align-items:center;justify-content:center;padding:40px 24px;text-align:center}
+.cbig{font-size:80px;margin-bottom:22px;animation:celebrate .6s cubic-bezier(.34,1.56,.64,1)}
+.ctitle{font-family:'Fredoka',sans-serif;font-size:30px;font-weight:700;color:var(--txt);margin-bottom:10px}
+.csub{font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:28px;max-width:280px}
+.cstats{display:flex;gap:12px;margin-bottom:28px;width:100%}
+.cstat{flex:1;background:var(--card);border:1.5px solid var(--border);border-radius:18px;padding:18px 12px}
+.cstatv{font-family:'Fredoka',sans-serif;font-size:20px;font-weight:700;color:var(--txt)}
+.cstatl{font-size:10px;color:var(--muted);font-weight:600;margin-top:3px}
+/* TOAST */
+#toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:var(--teal);color:#fff;border-radius:20px;padding:10px 22px;font-size:13px;font-weight:700;z-index:9999;box-shadow:0 6px 24px rgba(26,26,46,.12);white-space:nowrap;display:none;animation:slideUp .3s ease}
+/* LOADING */
+#loading{position:fixed;inset:0;background:var(--bg);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.lbar{width:140px;height:3px;background:var(--border);border-radius:2px;overflow:hidden;margin-top:20px}
+.lbarfill{height:100%;background:var(--teal);border-radius:2px;animation:loadBar 1.3s ease forwards}
+</style>
+</head>
+<body>
+<div id="app">
+
+<div id="loading">
+  <img src="data:image/png;base64,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" style="width:80px;height:80px;object-fit:contain;border-radius:20px" alt="KaiLens">
+  <div style="font-family:'Fredoka',sans-serif;font-size:26px;font-weight:700;color:var(--txt);margin-top:12px">KaiLens</div>
+  <div style="font-size:12px;color:var(--muted);margin-top:4px">Know what you can cook tonight</div>
+  <div class="lbar"><div class="lbarfill"></div></div>
+</div>
+<div id="toast"></div>
+
+<!-- HOME -->
+<div id="s-home" class="screen">
+<div class="ss">
+  <div class="htop">
+    <div class="hlogo">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAANIUlEQVR42u1Za5BcxXX+TveduXdmdvYx+5DQA4zevBw7yE5cwTHCFibCCGJlNxTlFCQlIuGqQEyVHWwS7w6OyzaJIyA2AixcRjw9k5iyCYaCwIqXLQlJ2EQy6C0haZFYaV/zvrf7nPyYO7OzsgJaAb+inrp1597ue/qcPqfP42vgdDvdTrfT7XT7/9zo/RIQEeoD6HfZ7PumdW53t6CvD+l0WgDIhye2CPX2iwOiD22Kz/T3O+jtVe81zpks4e5MRmeJbBowAPDlI0emOiJdFV88Ux8VNHwRQYAAEQBsDCnHkeBEhANAaW1sJHZ01n13HkwvWmQAoFtEZ4nsB2JCNWJXbdjQPmPW3OsD5i/61s5n4WZWGlW9C0SOVxjqFiFhpxDhRAPZcgkKe8D8RCk/tvq/zj//re5MRmd7euz7EqDG/Jf3HlgSbU3eE7ixmaOFAirlMjgwIgQRjDM1zlrDs1SZlNrMUhV4Aj9EpCJRRGIxmGJhOMgVbnny/Pn3/V+aUJMxm5X7DiyLtrU8OWrszCNH3glK+TxbY6osCQgiBIT3+tXwjIar/h4EAUn1AluWoFTiwtCxIAhMm9PZce/i32z9epbIdmcyetIa6BVRaUBW7N9/TizZsnkkMNFcucwEaBYhAQAOFx+guqXU1lkgE/QgJ3IvUlMO6osBERYwEQnF4k7+8NtLXvzkHz7VnRGd7RnXxHtq4HfZLIFIopHo7cb1vFy5ZCGiLTNYBCICgYT/q7KwCIQBkWpvfZwgvJ/omtjHLICIsswkxohyIv92biYTzXaDT9qEekVUtqfHLt+9e55V+rKhoSEWFmciQ+HGrN9DtoWrYzi8RKxArADmRMwzs0BrIu0QS50SIKKDUpGdZHJB07QzLwaRNJrSu2tgXbVf68inJZHQvjXMImDmiQxw+I5ZuPYcrqIVYRYRnUg4yos5Kp6IcPWdYRZhZlhmctpSyi+X1xYLhVtVshlMpCxA4WIJHEdI6cUA8E5nJ52cABdXb5YxxxfAhLRYwAwYEeaayXBoKizCDDEs1V6KRjW5UVUeHrrDHxlZWhkZ/lfyPK0STRGKx1S5Un6VYD5aKuRzflDZlhs8+rSJumQq/jW+7/eiKQljrbXGkAALAKBrcFAmFcgMIc6WweFK61hcq2hUm1IRXK7UvSWLsBOPa3Ii2hQKYGFYa3fYXO6x5z5+QW9I7olLfvs/2yniLoDI3wRefP7m9RuLHzlrxm2INf1DOeJ9kXft2vHa17/3xNzerzwzJeIKmBUbg0CkpZ5yTEYAhsAKwwqLdj0K8vlnWexzRGq5cr05tlIRCFgnk44/Mvw8izzLSt/IbLftenPr0oM9PaVukbrdZonWAMCn1r/2stORenzGrLO3jRWL34l79hvCjOJY0Uz/2sqXEl2dHwsKeSaltGKBMFctpq/v5FKJdTUnxwwbeoWgUjb50cKKl/74Y3svfu31g/HmlodsqVRxWlpixeGhp/r/46dLkU6bC/pfPgrB7IM9PSUCkM1mgW2dBKzDWf393v5Fi8pv79uztyPZhJgb+fuxkfLm3DH5rBOPJQw5B5s9dZUq5J+lmDdHfN+ISN3c05MNZAaAZYZhId/3bcBF/RkRp+Jbv1IqMcViscLQ0Is739i6rLuvTwjA0dH8RXnGtfFHfn5Z68P/eTV6eizSiwzSabN/0aJy/P5Hv2Dapz5SHhp+cefrWzKuG78hkUxs8Tx3Qcv8efeM5HKXlkfGVlrtkIhIdZ+dYjLHzLDhZrUMCjgq64nMwpc2WmpKquKRwxsHtm9berC7u5Il4tiPM9/x2juvTSiWzpnTnxo7dODbiR9nriEvMkOJ5EzF35BoSf5tat7cc7Fv1w2pGbMuj7W1EoLg38l15wWHB4wXj9/81t4Dn54V93JRz0uSMIRPUYCaT656IAZQrnoncGvu8OEDxwb2f2FPd/cYiMRb89g/ds6ZdUuzRqBdN5Is+YGJJ2aIlIrK0XlH6Q6Jx7/Z1JRY7JQKKBlOEstut2vqdTxwiCOVSrG9ORnPB5Xi3lweVkQLs4CFRGSSAqyr7YGGCCsMv1SlVMoVd4++M7hkz7IrBgEguubhm9tnn/2tVge+jkYiNjAHTKn8l4eWXvrr40l3PP/ylVwqPcSO86W9l3/uXxLrfv1K28wZf9KhKN6kNcrG/+qOqe2fpaZk3JZLvgaiLJZOKZljMCRMeUQAJ64sALy55JIX9iy7Yit6+53YT7JfSc088/ttXsQorbVlDkpDx5a9ufiiKvOr1nxKPfD4X+G7PzwHAN645KKfl44cXqlT7R9NZZ+8fWvm6cuODhxa7lj/a23FwT/IPvPC0Vhr22oul9lCVG3u0AvJ5AQIcxxpyOdrldmFmzZFkHpdJ1uarm6f0gnFEqh4Qvv5/C92LFn8KkTIuffhf4qfOfNXyfa2tYnZszZH7167DCJq+/2rH7ODR3Y2zZj+1a5LPvn8d+fPzR14fec7dz2zZXnzmWe9Gk/E2xAEYaYq9Qxx8ho4LnUo+j4BQPv99zdtXrgwwNCNwUdcWWxHhl9RiXiMmZlZ1kOEYnf9aHpzW+utnc1N6HCdcmdXe6y5q/029PUpZLOWLe9qaW2xzc2JdSWHto96kb84448+8XedHa2Op4iVVoQw5wrT9ckIsK4eyLi+iQW2xBoArNd6VewnmTTSxBs3bMgP7tr2Z6WR0Rd0S6sCV0vOppYOt7U5EY25jolGHSQijm1NNiVqcwuLwK9o8iuPXJ1K/XY4sFtTrjaeGzVKEdVKvGq+SKemgTA1BlezSsCtvvfiiXLT2bO/6dzz0Eqk03ysubk48upLlxcPDWwRTZ8DkQzGzT6H6FGvvcOJJpNepCmhHZLVSKf9sBKImuHh8pAp7SYiuJouggkcUCggQFUZGoCKvj6a9Ca2XIsDDLZWobdXQSlpdojbpk9bHbn7weXo6bFHFi6sHFq/eXG5WHKnPvqzc9DTY3P7Rq8vDAysCCqV24sDA3/+5qUXf+/CTZsiyGQ0QK615o1jV16Zl3t+2gKl5yIIICyqXoKGqTrLKQey0I0ywxhG1No80mlWj/+yorVSqea4LzNn/GjoB2tLvGjRw2PAUPSxX9xidfRB9H7/0rdXLB0CcF8jzc0LFwYAYJ96TsHqjSCStjVrZyrH6ZIgENSqvfFSGnKCSDYpAaxla7QTfWek/Ne4bdXjxWLlS0kAGkSpZIwx44wHR+57JGXeOvx8Ple4rm3u7AsTgdlYuvuBH3Ch/AqsySPmTtWJ5A3sV3ZIvvhkObALlG9c3HbnxyvkroDnkghbiKiGCrX6Yzk1AQIxsNWEjpS1iKc6vh3MVv8cb0+RKpdBiiIOIKnWJDmx2F1jsRhira2I+WWOTumcnU+1r/JHRsDGGOV5TiSRgAQ+bMW/Nep60I7T3jJ/zpZoPAbt+xCtNRqq5/H99/sSnFw9YBhsuR4DWuKubZo+RSsCK60ViYgQISIibZ7DzdOnaABWKdIQsKvIcmebw4ADEUuAkOsREh4pIhAJujpaSSCiQGo81tS8D0DMsJZtPZ1Op09egFLg5zRXCxpARBGU0kqEjnMCRKQApR0tUnUQVdEEjiIVRkGqmwbROC6iIBAoNQ5+1ZkXYQgBYMvD1YJiHIc9KQGKhcouLxGAxVIYUEJcqoZOTQyR0ghYSR2xqnIhx0FeIif4RsYRPBFigZCIWGN2AAAaauJ3FeCFdesYAMqjI7+SaMQoIl0njEZoMEwzAFDYIY2pbN2cpf48QYywW2pWI7VFqbtQZcsVCgqlfgBAQ0383tCiiAIRz/rlc097nV2ft7m8IQVdsxkA1URlArBV559QS2FqtizSyGxdlLqi6n6fa3IwolFVGR7ZdXhg5wW48UY/nFZOLpBlswQRKh0b+UZ5dMyKImJmruI9DGYGC4ewStVT1LEgbgS1xlOREwJbLCFoMA7bMIswwRoQ+cXyLbjppgqyWdUIveqTEEBw3nk6f033gPv5K46oltalxJaE2VR9NQhcz1TpeMbqO7HRXEQmmFbDeKrhYmwtAwSOJSLFtw6uGr5u2R3IZDSOQ6lPHl4PP+566GfXu6m2O6LJZFwqFcAaIShbpyTAidHP+iapyUUT7F+4aoIsJEopRF0EhQL7o2PfGr52WV84Px9PfHJHLKEQqR8+cE50SufNKhJZoiPONB11AVVNXaiRMDWeD0w4lmrYKg25DjPE92EqlSEO7DPB6NCqsRuu21jbhx/MGVmjGnvvbE6dfcYCR0WmMQJvQvRmbSwxg4jATBqArTHB1dLQU44DZoKCWAYxo6IQDAaHj27P33rT4O/N94G13l6FjLzr/vFAkN+8nRARR0RUeLki4spWiYq8+/fIZDR65T2dzPs7pROh0CvUQasLp02jzQPz5O4/TcyOGHyCBSVREBKVF7FKK4orKMcw2/8e2/dEdtu2cdM477yqsXV3M4g+xFPKSRzB3rtpU2Si8kT19vc7H9Qc/wvvMg6bEdjhJQAAAABJRU5ErkJggg==" style="width:36px;height:36px;object-fit:contain;border-radius:10px" alt="">
+      <span>KaiLens</span>
+    </div>
+  </div>
+  <p style="font-size:13px;color:var(--muted);margin-top:10px;padding:0 20px">What can you cook tonight?</p>
+  <div class="hero" onclick="goTo('s-import')">
+    <div class="hero-bg">&#127859;</div>
+    <h2>Your recipe,<br>your kitchen,<br>right now.</h2>
+    <p>Paste a recipe link. Snap your fridge and pantry.<br>Kai tells you exactly what you can make.</p>
+    <button class="hero-btn">Start with a recipe</button>
+  </div>
+  <div class="qrow">
+    <div class="qcard" onclick="goTo('s-import')">
+      <div class="qicon" style="background:#F0EEFF">&#128279;</div>
+      <div class="qlabel">Import Recipe</div>
+      <div class="qsub">Instagram · Any URL</div>
+    </div>
+    <div class="qcard" onclick="goTo('s-scan-fridge')">
+      <div class="qicon" style="background:#E0FAF8">&#128248;</div>
+      <div class="qlabel">Scan Kitchen</div>
+      <div class="qsub">Fridge · Pantry</div>
+    </div>
+  </div>
+  <div class="slabel">Your Kollection</div>
+  <div>
+    <div class="rrow" onclick="loadDemo()">
+      <div class="remoji" style="background:#FFF4E6">&#127837;</div>
+      <div class="rmeta"><div class="rtitle">Creamy Garlic Pasta</div><div class="rsub">@foodwith_maria · Italian · 20 min</div></div>
+      <div class="mpill" style="background:var(--green-bg);color:var(--green)">Ready</div>
+    </div>
+    <div class="rrow" onclick="loadDemo()">
+      <div class="remoji" style="background:#E0FAF8">&#127831;</div>
+      <div class="rmeta"><div class="rtitle">Chicken Tikka Masala</div><div class="rsub">@tastemade · Indian · 45 min</div></div>
+      <div class="mpill" style="background:var(--amber-bg);color:var(--amber)">Need 3</div>
+    </div>
+    <div class="rrow" onclick="loadDemo()">
+      <div class="remoji" style="background:#FFF0F7">&#129367;</div>
+      <div class="rmeta"><div class="rtitle">Spinach Parmesan Salad</div><div class="rsub">@ottolenghi · Salads · 10 min</div></div>
+      <div class="mpill" style="background:var(--green-bg);color:var(--green)">Ready</div>
+    </div>
+  </div>
+  <div style="height:24px"></div>
+</div>
+</div>
+
+<!-- IMPORT -->
+<div id="s-import" class="screen">
+<div class="ss">
+  <div class="ihead">
+    <div class="bbl" onclick="goTo('s-home')"><svg width="14" height="14" fill="none" stroke="var(--txt)" stroke-width="2.5" viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div><div class="ititle">Import a Recipe</div><div class="isub">Paste any recipe link or Instagram URL</div></div>
+  </div>
+  <div class="urlbox">
+    <span style="font-size:18px">&#128279;</span>
+    <input id="url-input" type="url" placeholder="https://www.instagram.com/p/...">
+    <span style="font-size:15px;cursor:pointer;color:var(--muted)" onclick="document.getElementById('url-input').value=''">x</span>
+  </div>
+  <div class="tipbox">
+    <div class="tipicon">*</div>
+    <p class="tiptext"><strong>Kai tip:</strong> Works with Instagram posts, food blogs, and any recipe page. Copy the link, paste it here.</p>
+  </div>
+  <div style="padding:0 20px 16px"><button class="bp" onclick="startExtract()">Extract Recipe with Kai</button></div>
+  <div class="ordiv">or jump to a saved recipe</div>
+  <div style="display:flex;flex-wrap:wrap;gap:8px;padding:0 20px 24px">
+    <div class="chip" onclick="loadDemo()">Creamy Garlic Pasta</div>
+    <div class="chip" onclick="loadDemo()">Chicken Tikka</div>
+    <div class="chip" onclick="loadDemo()">Spinach Salad</div>
+    <div class="chip" onclick="loadDemo()">French Omelette</div>
+  </div>
+</div>
+</div>
+
+<!-- EXTRACTING -->
+<div id="s-extracting" class="screen">
+  <div class="espin">*</div>
+  <div class="etitle">Reading your recipe...</div>
+  <div class="esub">Kai is extracting ingredients from the link</div>
+  <div class="esteps">
+    <div class="estep" id="step-1"><div class="edot">1</div><div class="elabel">Fetching recipe page</div></div>
+    <div class="estep" id="step-2"><div class="edot">2</div><div class="elabel">Reading the content</div></div>
+    <div class="estep" id="step-3"><div class="edot">3</div><div class="elabel">Extracting ingredients with Kai</div></div>
+  </div>
+</div>
+
+<!-- RECIPE -->
+<div id="s-recipe" class="screen">
+<div class="ss">
+  <div style="padding:20px 20px 0;display:flex;align-items:center;gap:12px;margin-bottom:4px">
+    <div class="bbl" onclick="goTo('s-import')"><svg width="14" height="14" fill="none" stroke="var(--txt)" stroke-width="2.5" viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <span style="font-family:'Fredoka',sans-serif;font-size:16px;font-weight:700;color:var(--txt)">Recipe Found</span>
+  </div>
+  <div class="rhero">
+    <div class="rebox" id="recipe-emoji-box" style="background:#FFF4E6">&#127837;</div>
+    <div><div class="retitle" id="recipe-title">Creamy Garlic Butter Pasta</div><div class="resrc" id="recipe-source">@foodwith_maria on Instagram</div></div>
+  </div>
+  <div class="metarow" id="recipe-meta">
+    <div class="pill" style="background:#FFF4E6;color:#CC7A00">20 min</div>
+    <div class="pill" style="background:#E0FAF8;color:#007A72">Italian</div>
+    <div class="pill" style="background:#F0EEFF;color:#534AB7">Easy</div>
+    <div class="pill" style="background:#E6F3FF;color:#185FA5">Serves 2</div>
+  </div>
+  <div class="istats">
+    <div class="istat"><div class="istatnum" id="ing-total">9</div><div class="istatlabel">ingredients</div></div>
+    <div class="istat"><div class="istatnum" id="ing-likely" style="color:var(--green)">6</div><div class="istatlabel">likely have</div></div>
+    <div class="istat"><div class="istatnum" id="ing-check" style="color:var(--coral)">3</div><div class="istatlabel">to check</div></div>
+  </div>
+  <div style="font-family:'Fredoka',sans-serif;font-size:16px;font-weight:700;color:var(--txt);padding:0 20px;margin-bottom:10px">Ingredients Kai found</div>
+  <div class="ingcard" id="ing-list">
+    <div class="ingrow"><div class="ingbox" style="background:#FFF4E6">&#127837;</div><div><div class="ingname">Spaghetti</div><div class="ingamt">200g</div></div></div>
+    <div class="ingrow"><div class="ingbox" style="background:#FFF8E7">&#129476;</div><div><div class="ingname">Garlic cloves</div><div class="ingamt">4 cloves</div></div></div>
+    <div class="ingrow"><div class="ingbox" style="background:#FFFBF0">&#129480;</div><div><div class="ingname">Butter</div><div class="ingamt">3 tbsp</div></div></div>
+    <div class="ingrow"><div class="ingbox" style="background:#FFF5E6">&#129472;</div><div><div class="ingname">Parmesan</div><div class="ingamt">50g grated</div></div></div>
+    <div class="ingrow"><div class="ingbox" style="background:#FFF0F0">&#129371;</div><div><div class="ingname">Heavy cream</div><div class="ingamt">100ml</div></div></div>
+    <div class="ingrow"><div class="ingbox" style="background:#F0F8FF">&#129474;</div><div><div class="ingname">Salt</div><div class="ingamt">to taste</div></div></div>
+    <div class="ingrow"><div class="ingbox" style="background:#F5F5F5">&#129403;</div><div><div class="ingname">Black pepper</div><div class="ingamt">to taste</div></div></div>
+    <div class="ingrow"><div class="ingbox" style="background:#E8F8F0">&#127807;</div><div><div class="ingname">Fresh parsley</div><div class="ingamt">handful</div></div></div>
+    <div class="ingrow"><div class="ingbox" style="background:#F8F0FF">&#129703;</div><div><div class="ingname">Pasta water</div><div class="ingamt">half cup</div></div></div>
+  </div>
+  <div style="padding:0 20px 28px;display:flex;flex-direction:column;gap:10px">
+    <button class="bp" onclick="goTo('s-scan-fridge')">Now scan your kitchen</button>
+    <button class="bo" onclick="goTo('s-home')">Save for later</button>
+  </div>
+</div>
+</div>
+
+<!-- SCAN FRIDGE -->
+<div id="s-scan-fridge" class="screen scanscreen">
+  <div class="sambient" style="background:linear-gradient(160deg,rgba(0,194,178,.13),transparent 60%)"></div>
+  <div class="stopbar">
+    <div class="bb" onclick="goTo('s-recipe')"><svg width="14" height="14" fill="none" stroke="#fff" stroke-width="2.5" viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div class="sphase">Step 1 of 2 - Fridge</div>
+  </div>
+  <div class="sinstr"><h3>Show me your fridge</h3><p>Open your fridge, take a photo.<br>Kai will spot everything inside.</p></div>
+  <div class="vf" id="vf-fridge">
+    <div class="vfgrid"><div class="vfcell"></div><div class="vfcell"></div><div class="vfcell"></div><div class="vfcell"></div><div class="vfcell"></div><div class="vfcell"></div><div class="vfcell"></div><div class="vfcell"></div><div class="vfcell"></div></div>
+    <div class="vfline"></div>
+    <div class="vfc tl"></div><div class="vfc tr"></div><div class="vfc bl"></div><div class="vfc br"></div>
+    <div class="vfph">&#10052;</div>
+  </div>
+  <div class="sbottom">
+    <div class="pdots"><div class="pdot active"></div><div class="pdot"></div></div>
+    <div class="dcount" id="fridge-count">Ready - tap to photograph your fridge</div>
+    <div class="schips" id="fridge-chips"></div>
+    <div class="shutwrap">
+      <label for="fridge-file" class="shutter">&#128247;</label>
+      <div class="shutlabel">TAP TO PHOTOGRAPH</div>
+    </div>
+    <input type="file" id="fridge-file" class="finh" accept="image/*" capture="environment" onchange="handleFridgeScan(this)">
+  </div>
+</div>
+
+<!-- SCAN PANTRY -->
+<div id="s-scan-pantry" class="screen scanscreen">
+  <div class="sambient" style="background:linear-gradient(160deg,rgba(255,159,67,.12),transparent 60%)"></div>
+  <div class="stopbar">
+    <div class="bb" onclick="goTo('s-scan-fridge')"><svg width="14" height="14" fill="none" stroke="#fff" stroke-width="2.5" viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div class="sphase">Step 2 of 2 - Pantry</div>
+  </div>
+  <div class="sinstr"><h3>Now your pantry</h3><p>Pasta, oils, cans, spices - Kai needs<br>to see everything to match your recipe.</p></div>
+  <div class="vf pvf" id="vf-pantry">
+    <div class="vfgrid"><div class="vfcell"></div><div class="vfcell"></div><div class="vfcell"></div><div class="vfcell"></div><div class="vfcell"></div><div class="vfcell"></div><div class="vfcell"></div><div class="vfcell"></div><div class="vfcell"></div></div>
+    <div class="vfline pvfl"></div>
+    <div class="vfc tl pvfc"></div><div class="vfc tr pvfc"></div><div class="vfc bl pvfc"></div><div class="vfc br pvfc"></div>
+    <div class="vfph">&#128452;</div>
+  </div>
+  <div class="sbottom">
+    <div class="pdots"><div class="pdot done"></div><div class="pdot active"></div></div>
+    <div class="dcount pdcount" id="pantry-count">Ready - tap to photograph your pantry</div>
+    <div class="schips" id="pantry-chips"></div>
+    <div class="shutwrap">
+      <label for="pantry-file" class="shutter pshut">&#128247;</label>
+      <div class="shutlabel">TAP TO PHOTOGRAPH</div>
+    </div>
+    <input type="file" id="pantry-file" class="finh" accept="image/*" capture="environment" onchange="handlePantryScan(this)">
+  </div>
+</div>
+
+<!-- PROCESSING -->
+<div id="s-processing" class="screen">
+  <div class="prospin">*</div>
+  <div class="protitle">Kai is putting your kitchen together...</div>
+  <div class="prosub">Cross-referencing your fridge and pantry against the recipe</div>
+  <div class="proitems">
+    <div class="proitem fri"><span style="font-size:18px">&#10052;</span><span class="proitemlabel" id="proc-fridge-label">Fridge - scanning...</span><span class="proitemcount" id="proc-fridge-count"></span></div>
+    <div class="proitem pan"><span style="font-size:18px">&#128452;</span><span class="proitemlabel" id="proc-pantry-label">Pantry - scanning...</span><span class="proitemcount" id="proc-pantry-count"></span></div>
+  </div>
+</div>
+
+<!-- MATCH -->
+<div id="s-match" class="screen">
+<div class="ss">
+  <div class="mtopbar">
+    <div class="bbl" onclick="goTo('s-scan-pantry')"><svg width="14" height="14" fill="none" stroke="var(--txt)" stroke-width="2.5" viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div style="flex:1"><div class="mrecname" id="match-recipe-name">Creamy Garlic Pasta</div><div class="mrecsrc" id="match-recipe-source">@foodwith_maria</div></div>
+    <div class="mrecicon" id="match-recipe-icon" style="background:#FFF4E6">&#127837;</div>
+  </div>
+  <div class="vcard cc" id="verdict-card">
+    <div class="vemoji" id="verdict-emoji">&#9989;</div>
+    <div><div class="vmain" id="verdict-main">You can make this tonight</div><div class="vsub" id="verdict-sub">You have 7 of 9 ingredients. Missing 2 items.</div></div>
+  </div>
+  <div class="mstats">
+    <div class="mstat"><div class="mstatnum" id="stat-have" style="color:var(--green)">7</div><div class="mstatlabel">you have</div></div>
+    <div class="mstat"><div class="mstatnum" id="stat-miss" style="color:var(--red)">2</div><div class="mstatlabel">missing</div></div>
+    <div class="mstat"><div class="mstatnum" id="stat-total">9</div><div class="mstatlabel">total</div></div>
+  </div>
+  <div class="msec"><div class="msectitle">In your kitchen</div><div id="have-list"></div></div>
+  <div class="msec" id="miss-section"><div class="msectitle">You are missing</div><div id="miss-list"></div></div>
+  <div class="kaitip">
+    <div style="font-size:18px;flex-shrink:0">*</div>
+    <div class="kaitiptext" id="kai-tip-text"><strong>Kai says:</strong> You can skip parsley - it is garnish only. Sub heavy cream with milk plus a teaspoon of flour.</div>
+  </div>
+</div>
+<div class="msticky">
+  <button class="cookedbtn" id="cooked-btn" onclick="markCooked()">I cooked this tonight!</button>
+</div>
+</div>
+
+<!-- COOKED -->
+<div id="s-cooked" class="screen">
+  <div class="cbig">&#127881;</div>
+  <div class="ctitle">That is cooking!</div>
+  <div class="csub">You cooked from home instead of ordering out. Kai is proud of you.</div>
+  <div class="cstats">
+    <div class="cstat"><div style="font-size:26px;margin-bottom:8px">&#128176;</div><div class="cstatv">~$18</div><div class="cstatl">saved vs delivery</div></div>
+    <div class="cstat"><div style="font-size:26px;margin-bottom:8px">&#127807;</div><div class="cstatv">0 waste</div><div class="cstatl">ingredients used up</div></div>
+  </div>
+  <div style="width:100%;display:flex;flex-direction:column;gap:10px">
+    <button class="bp" onclick="goTo('s-import')">Find another recipe</button>
+    <button class="bo" onclick="goTo('s-home')">Back to kitchen</button>
+  </div>
+</div>
+
+</div>
+<script>
+var currentRecipe = null;
+var fridgeItems = [];
+var pantryItems = [];
+
+var DEMO = {
+  title: 'Creamy Garlic Butter Pasta',
+  emoji: '',
+  source: '@foodwith_maria on Instagram',
+  ingredients: [
+    {emoji:'', name:'Spaghetti', amount:'200g', have:true},
+    {emoji:'', name:'Garlic cloves', amount:'4 cloves', have:true},
+    {emoji:'', name:'Butter', amount:'3 tbsp', have:true},
+    {emoji:'', name:'Parmesan', amount:'50g grated', have:true},
+    {emoji:'', name:'Heavy cream', amount:'100ml', have:false},
+    {emoji:'', name:'Salt', amount:'to taste', have:true},
+    {emoji:'', name:'Black pepper', amount:'to taste', have:true},
+    {emoji:'', name:'Fresh parsley', amount:'handful', have:false},
+    {emoji:'', name:'Pasta water', amount:'half cup', have:true}
+  ],
+  kaiTip: 'You can skip parsley - it is garnish only. Sub heavy cream with milk plus a teaspoon of flour for a lighter sauce.'
+};
+
+function goTo(id) {
+  document.querySelectorAll('.screen').forEach(function(s) { s.classList.remove('active'); });
+  var el = document.getElementById(id);
+  if (el) el.classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function showToast(msg, dur) {
+  dur = dur || 2500;
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.style.display = 'block';
+  setTimeout(function() { t.style.display = 'none'; }, dur);
+}
+
+function callApi(endpoint, body) {
+  return fetch('/api/' + endpoint, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body)
+  }).then(function(r) {
+    if (!r.ok) throw new Error('API error');
+    return r.json();
+  });
+}
+
+function startExtract() {
+  var url = document.getElementById('url-input').value.trim();
+  if (!url) { showToast('Paste a recipe link first'); return; }
+  goTo('s-extracting');
+  runExtractSteps();
+  callApi('extract', { url: url }).then(function(r) {
+    currentRecipe = r;
+    renderRecipe(r);
+    goTo('s-recipe');
+  }).catch(function() {
+    showToast('Could not read that link - try another');
+    goTo('s-import');
+  });
+}
+
+function runExtractSteps() {
+  var steps = ['step-1', 'step-2', 'step-3'];
+  steps.forEach(function(id, i) {
+    setTimeout(function() {
+      if (i > 0) {
+        var p = document.getElementById(steps[i - 1]);
+        p.classList.remove('active');
+        p.classList.add('done');
+        p.querySelector('.edot').textContent = 'ok';
+      }
+      document.getElementById(id).classList.add('active');
+    }, i * 1100);
+  });
+}
+
+function loadDemo() {
+  currentRecipe = DEMO;
+  renderRecipe(DEMO);
+  goTo('s-recipe');
+}
+
+function renderRecipe(r) {
+  document.getElementById('recipe-title').textContent = r.title;
+  document.getElementById('recipe-source').textContent = r.source || 'Recipe';
+  document.getElementById('recipe-emoji-box').textContent = r.emoji || '';
+  document.getElementById('ing-total').textContent = r.ingredients.length;
+  var likely = r.ingredients.filter(function(i) { return i.have; }).length;
+  document.getElementById('ing-likely').textContent = likely;
+  document.getElementById('ing-check').textContent = r.ingredients.length - likely;
+  document.getElementById('ing-list').innerHTML = r.ingredients.map(function(i) {
+    return '<div class="ingrow"><div class="ingbox" style="background:#FFF8F0">' + (i.emoji || '') + '</div><div><div class="ingname">' + i.name + '</div><div class="ingamt">' + i.amount + '</div></div></div>';
+  }).join('');
+}
+
+function toBase64(file) {
+  return new Promise(function(res, rej) {
+    var rd = new FileReader();
+    rd.onload = function() { res(rd.result.split(',')[1]); };
+    rd.onerror = rej;
+    rd.readAsDataURL(file);
+  });
+}
+
+var POSITIONS = [
+  {x:22,y:25},{x:62,y:32},{x:18,y:58},{x:68,y:62},
+  {x:40,y:72},{x:74,y:20},{x:30,y:45},{x:55,y:48},
+  {x:15,y:80},{x:78,y:75},{x:50,y:20},{x:85,y:45}
+];
+
+function addBubble(vf, item, i, isPantry) {
+  var p = POSITIONS[i % POSITIONS.length];
+  var b = document.createElement('div');
+  b.className = 'dbubble' + (isPantry ? ' pbubble' : '');
+  b.style.left = p.x + '%';
+  b.style.top = p.y + '%';
+  b.innerHTML = '<span style="font-size:14px">' + (item.emoji || '') + '</span><div><div class="bname">' + item.name + '</div><div class="bconf">' + item.conf + '% match</div></div>';
+  vf.appendChild(b);
+}
+
+function addChip(container, item, isPantry) {
+  var c = document.createElement('div');
+  c.className = 'schip' + (isPantry ? ' pschip' : '');
+  c.innerHTML = '<span style="font-size:14px">' + (item.emoji || '') + '</span><span>' + item.name + '</span>';
+  container.appendChild(c);
+}
+
+function handleFridgeScan(input) {
+  if (!input.files[0]) return;
+  var countEl = document.getElementById('fridge-count');
+  var chipsEl = document.getElementById('fridge-chips');
+  var vf = document.getElementById('vf-fridge');
+  countEl.textContent = 'Kai is looking inside your fridge...';
+  chipsEl.innerHTML = '';
+  vf.querySelectorAll('.dbubble').forEach(function(b) { b.remove(); });
+  toBase64(input.files[0]).then(function(b64) {
+    return callApi('scan', { image: b64, location: 'fridge' });
+  }).then(function(items) {
+    if (!Array.isArray(items)) items = items.items || [];
+    fridgeItems = items;
+    items.forEach(function(item, i) {
+      setTimeout(function() {
+        addBubble(vf, item, i, false);
+        addChip(chipsEl, item, false);
+        countEl.textContent = (i + 1) + ' item' + (i > 0 ? 's' : '') + ' spotted in fridge';
+      }, i * 480);
+    });
+    setTimeout(function() { goTo('s-scan-pantry'); }, items.length * 480 + 700);
+  }).catch(function() {
+    showToast('Could not read the photo - try again');
+    countEl.textContent = 'Ready - tap to photograph your fridge';
+  });
+}
+
+function handlePantryScan(input) {
+  if (!input.files[0]) return;
+  var countEl = document.getElementById('pantry-count');
+  var chipsEl = document.getElementById('pantry-chips');
+  var vf = document.getElementById('vf-pantry');
+  countEl.textContent = 'Kai is scanning your pantry...';
+  chipsEl.innerHTML = '';
+  vf.querySelectorAll('.dbubble').forEach(function(b) { b.remove(); });
+  toBase64(input.files[0]).then(function(b64) {
+    return callApi('scan', { image: b64, location: 'pantry' });
+  }).then(function(items) {
+    if (!Array.isArray(items)) items = items.items || [];
+    pantryItems = items;
+    items.forEach(function(item, i) {
+      setTimeout(function() {
+        addBubble(vf, item, i, true);
+        addChip(chipsEl, item, true);
+        countEl.textContent = (i + 1) + ' item' + (i > 0 ? 's' : '') + ' spotted in pantry';
+      }, i * 480);
+    });
+    setTimeout(function() {
+      goTo('s-processing');
+      updateProcessing();
+      setTimeout(function() { buildMatchScreen(); goTo('s-match'); }, 2200);
+    }, items.length * 480 + 700);
+  }).catch(function() {
+    showToast('Could not read the photo - try again');
+    countEl.textContent = 'Ready - tap to photograph your pantry';
+  });
+}
+
+function updateProcessing() {
+  document.getElementById('proc-fridge-label').textContent = 'Fridge - ' + fridgeItems.length + ' items found';
+  document.getElementById('proc-fridge-count').textContent = 'done';
+  setTimeout(function() {
+    document.getElementById('proc-pantry-label').textContent = 'Pantry - ' + pantryItems.length + ' items found';
+    document.getElementById('proc-pantry-count').textContent = 'done';
+  }, 800);
+}
+
+function buildMatchScreen() {
+  var r = currentRecipe || DEMO;
+  var kitchen = fridgeItems.concat(pantryItems).map(function(i) { return i.name.toLowerCase(); });
+  document.getElementById('match-recipe-name').textContent = r.title;
+  document.getElementById('match-recipe-source').textContent = r.source || '';
+  document.getElementById('match-recipe-icon').textContent = r.emoji || '';
+  var have = [];
+  var miss = [];
+  r.ingredients.forEach(function(ing) {
+    var n = ing.name.toLowerCase();
+    var found = kitchen.some(function(k) {
+      return k.indexOf(n.split(' ')[0]) !== -1 || n.indexOf(k.split(' ')[0]) !== -1;
+    }) || ing.have;
+    if (found) have.push(ing); else miss.push(ing);
+  });
+  document.getElementById('have-list').innerHTML = have.map(function(i) {
+    return '<div class="ming have"><div class="mingemoji">' + (i.emoji || '') + '</div><div class="mingname">' + i.name + '</div><div class="mingamt">' + i.amount + '</div><span style="color:var(--green)">ok</span></div>';
+  }).join('');
+  document.getElementById('miss-list').innerHTML = miss.map(function(i) {
+    return '<div class="ming miss"><div class="mingemoji">' + (i.emoji || '') + '</div><div class="mingname">' + i.name + '</div><div class="mingamt">' + i.amount + '</div><span style="color:var(--red)">x</span></div>';
+  }).join('');
+  document.getElementById('stat-have').textContent = have.length;
+  document.getElementById('stat-miss').textContent = miss.length;
+  document.getElementById('stat-total').textContent = r.ingredients.length;
+  var vc = document.getElementById('verdict-card');
+  var vm = document.getElementById('verdict-main');
+  var vs = document.getElementById('verdict-sub');
+  var ve = document.getElementById('verdict-emoji');
+  var ms = document.getElementById('miss-section');
+  if (miss.length === 0) {
+    vc.className = 'vcard cc'; ve.innerHTML = '&#9989;';
+    vm.textContent = 'You can make this right now!';
+    vs.textContent = 'You have every ingredient. Go cook.';
+    ms.style.display = 'none';
+  } else if (miss.length <= 2) {
+    vc.className = 'vcard cc'; ve.innerHTML = '&#9989;';
+    vm.textContent = 'You can make this tonight';
+    vs.textContent = 'You have ' + have.length + ' of ' + r.ingredients.length + ' ingredients. Missing ' + miss.length + '.';
+    ms.style.display = 'block';
+  } else {
+    vc.className = 'vcard ni'; ve.innerHTML = '&#128722;';
+    vm.textContent = 'Almost there - need a few things';
+    vs.textContent = 'You have ' + have.length + ' of ' + r.ingredients.length + ' ingredients.';
+    ms.style.display = 'block';
+  }
+  if (r.kaiTip) {
+    document.getElementById('kai-tip-text').innerHTML = '<strong>Kai says:</strong> ' + r.kaiTip;
+  }
+}
+
+function markCooked() {
+  var btn = document.getElementById('cooked-btn');
+  btn.classList.add('done');
+  btn.textContent = 'Amazing! Well done.';
+  setTimeout(function() { goTo('s-cooked'); }, 900);
+}
+
+window.addEventListener('load', function() {
+  setTimeout(function() {
+    document.getElementById('loading').style.display = 'none';
+    goTo('s-home');
+  }, 1500);
+});
+</script>
+</body>
+</html>
