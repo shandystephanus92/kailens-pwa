@@ -212,7 +212,7 @@ html,body{height:100%;background:#c8ede9;font-family:'Nunito',sans-serif;color:v
 .proitemlabel{font-size:12px;color:rgba(255,255,255,.7);font-weight:600;flex:1}
 .proitemcount{font-size:11px;color:#00C2B2;font-weight:700}
 /* MATCH */
-#s-match{overflow-y:auto;padding-bottom:140px}
+#s-match{overflow-y:auto;padding-bottom:200px}
 .mtopbar{padding:20px 20px 16px;display:flex;align-items:center;gap:12px}
 .mrecname{font-family:'Fredoka',sans-serif;font-size:18px;font-weight:700;color:var(--txt)}
 .mrecsrc{font-size:11px;color:var(--muted);margin-top:2px}
@@ -241,7 +241,7 @@ html,body{height:100%;background:#c8ede9;font-family:'Nunito',sans-serif;color:v
 .mingamt{font-size:11px;color:var(--muted)}
 .kaitip{margin:0 20px 16px;background:var(--teal-dim);border:1.5px solid rgba(0,194,178,.35);border-radius:16px;padding:13px 14px;display:flex;gap:10px;align-items:flex-start}
 .kaitiptext{font-size:12px;color:var(--teal-dark);line-height:1.6}
-.msticky{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;background:var(--bg);padding:12px 20px 20px;border-top:1px solid var(--border);z-index:100}
+.msticky{position:fixed;bottom:64px;left:50%;transform:translateX(-50%);width:100%;max-width:430px;background:var(--bg);padding:12px 20px 16px;border-top:1px solid var(--border);z-index:100}
 .cookedbtn{width:100%;background:linear-gradient(135deg,#00C2B2,#48DBBB);border:none;border-radius:16px;padding:16px;font-size:16px;font-weight:700;color:#fff;cursor:pointer;font-family:'Fredoka',sans-serif;transition:opacity .15s,transform .12s;display:flex;align-items:center;justify-content:center;gap:8px}
 .cookedbtn:active{opacity:.85;transform:scale(.98)}
 .cookedbtn.done{background:var(--green)}
@@ -435,7 +435,8 @@ html,body{height:100%;background:#c8ede9;font-family:'Nunito',sans-serif;color:v
   <div style="font-family:'Fredoka',sans-serif;font-size:16px;font-weight:700;color:var(--txt);padding:0 20px;margin-bottom:14px;margin-top:4px">How to Cook</div>
   <div id="steps-list"></div>
   <div style="padding:0 20px 28px;display:flex;flex-direction:column;gap:10px;margin-top:8px">
-    <button class="bp" onclick="startScanFrom('recipe')">Scan my kitchen to match</button>
+    <button class="bp" id="match-now-btn" onclick="matchNow()" style="display:none;background:var(--green)">&#9989; Match with my kitchen now</button>
+    <button class="bp" onclick="startScanFrom('recipe')">&#128247; Scan my kitchen to match</button>
     <button class="bo" onclick="goBack()">Back</button>
   </div>
 </div>
@@ -545,11 +546,11 @@ html,body{height:100%;background:#c8ede9;font-family:'Nunito',sans-serif;color:v
   </div>
   <div style="height:20px"></div>
 </div>
-<div class="msticky">
+<div style="position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;background:var(--bg);padding:12px 20px 20px;border-top:1px solid var(--border);z-index:100">
   <button class="cookedbtn" id="cooked-btn" onclick="markCooked()">&#127859; I cooked this tonight!</button>
   <div style="display:flex;gap:10px;margin-top:8px">
-    <button class="bo" style="font-size:13px;padding:10px" onclick="goTo('s-recipe')">View Recipe</button>
-    <button class="bo" style="font-size:13px;padding:10px" onclick="navTo('home')">Back to Home</button>
+    <button class="bo" style="font-size:13px;padding:11px" onclick="goTo('s-recipe')">View Recipe</button>
+    <button class="bo" style="font-size:13px;padding:11px" onclick="navTo('home')">Back to Home</button>
   </div>
 </div>
 </div>
@@ -842,6 +843,25 @@ function renderImportChips() {
   }).join('');
 }
 
+// ── INSTANT MATCH ──
+function matchNow() {
+  buildMatchScreen();
+  navHistory.push('s-match');
+  goTo('s-match');
+}
+
+function updateMatchButton() {
+  var btn = document.getElementById('match-now-btn');
+  if (!btn) return;
+  var hasKitchen = fridgeItems.length > 0 || pantryItems.length > 0;
+  btn.style.display = hasKitchen ? 'block' : 'none';
+  if (hasKitchen) {
+    var total = fridgeItems.length + pantryItems.length;
+    btn.textContent = '&#9989; Match with my kitchen (' + total + ' items)';
+    btn.innerHTML = '&#9989; Match with my kitchen (' + total + ' items)';
+  }
+}
+
 // ── RECIPE RENDER ──
 function renderRecipe(r) {
   document.getElementById('recipe-title').textContent = r.title;
@@ -869,6 +889,7 @@ function renderRecipe(r) {
   } else {
     stepsEl.innerHTML = '<div style="padding:0 20px 16px;font-size:13px;color:var(--muted)">No steps available.</div>';
   }
+  updateMatchButton();
 }
 
 // ── KITCHEN ──
