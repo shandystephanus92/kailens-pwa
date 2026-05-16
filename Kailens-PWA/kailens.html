@@ -16,19 +16,20 @@
   --bg:#FFF8F0;--card:#FFFFFF;--card2:#FDF5EC;--txt:#1A1A2E;--muted:#9B8EA8;--border:#EDE8F5;
   --green:#00B894;--green-bg:#E0FAF5;--coral:#FF6B6B;--coral-bg:#FFF0F0;
   --amber:#FF9F43;--amber-bg:#FFF4E6;--red:#FF6B6B;--red-bg:#FFF0F0;
+  --sky:#54A0FF;--sky-bg:#EBF3FF;--lilac:#A29BFE;--lilac-bg:#F0EEFF;
 }
 html,body{height:100%;background:#c8ede9;font-family:'Nunito',sans-serif;color:var(--txt)}
-#app{width:100%;max-width:430px;min-height:100vh;margin:0 auto;background:var(--bg);position:relative;overflow:hidden;display:flex;flex-direction:column}
-.screen{display:none;flex-direction:column;min-height:100vh;animation:slideIn 0.28s cubic-bezier(0.4,0,0.2,1)}
+#app{width:100%;max-width:430px;min-height:100vh;margin:0 auto;background:var(--bg);position:relative;display:flex;flex-direction:column}
+.screen{display:none;flex-direction:column;min-height:100vh;animation:slideIn 0.25s cubic-bezier(0.4,0,0.2,1)}
 .screen.active{display:flex}
-@keyframes slideIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}
+@keyframes slideIn{from{opacity:0;transform:translateX(16px)}to{opacity:1;transform:translateX(0)}}
 @keyframes slideUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
 @keyframes fadeInBubble{from{opacity:0;transform:translate(-50%,-50%) scale(0.7)}to{opacity:1;transform:translate(-50%,-50%) scale(1)}}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
 @keyframes scanLine{0%{top:10%}50%{top:75%}100%{top:10%}}
 @keyframes celebrate{0%{transform:scale(1)}40%{transform:scale(1.15)}100%{transform:scale(1)}}
 @keyframes loadBar{from{width:0}to{width:100%}}
-.ss{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.ss{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:80px}
 .ss::-webkit-scrollbar{display:none}
 .bbl{width:36px;height:36px;border-radius:50%;background:var(--card2);border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0}
 .bb{width:36px;height:36px;border-radius:50%;background:rgba(0,0,0,0.38);border:1px solid rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0}
@@ -36,6 +37,14 @@ html,body{height:100%;background:#c8ede9;font-family:'Nunito',sans-serif;color:v
 .bp:active{opacity:.85;transform:scale(.98)}
 .bo{background:transparent;color:var(--teal);border:2px solid var(--teal);border-radius:16px;padding:14px 20px;font-size:15px;font-weight:700;cursor:pointer;font-family:'Fredoka',sans-serif;width:100%}
 .pill{display:inline-flex;align-items:center;gap:4px;border-radius:999px;padding:5px 11px;font-size:11px;font-weight:700}
+/* NAV BAR */
+.navbar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;background:var(--card);border-top:1.5px solid var(--border);display:flex;align-items:center;z-index:200;padding:8px 0 12px}
+.navitem{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;padding:4px 0}
+.navitem-icon{width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:8px;font-size:17px;transition:background .2s}
+.navitem.active .navitem-icon{background:var(--teal-dim)}
+.navitem-label{font-size:9px;font-weight:700;color:var(--muted)}
+.navitem.active .navitem-label{color:var(--teal)}
+.nav-scan-btn{width:58px;height:58px;border-radius:50%;background:linear-gradient(135deg,#00C2B2,#48DBBB);display:flex;align-items:center;justify-content:center;font-size:24px;cursor:pointer;margin-top:-20px;border:3px solid var(--bg);box-shadow:0 6px 20px rgba(0,194,178,0.4)}
 /* HOME */
 .htop{padding:20px 20px 0;display:flex;justify-content:space-between;align-items:center}
 .hlogo{display:flex;align-items:center;gap:8px}
@@ -59,6 +68,24 @@ html,body{height:100%;background:#c8ede9;font-family:'Nunito',sans-serif;color:v
 .rtitle{font-size:13px;font-weight:700;color:var(--txt)}
 .rsub{font-size:11px;color:var(--muted);margin-top:2px}
 .mpill{font-size:10px;font-weight:700;padding:4px 9px;border-radius:8px;white-space:nowrap}
+/* KITCHEN SCREEN */
+.ktabs{display:flex;gap:10px;padding:14px 20px 0}
+.ktab{flex:1;background:var(--card);border-radius:16px;border:1.5px solid var(--border);padding:12px 8px;text-align:center;cursor:pointer;transition:all .2s}
+.ktab.active{border-color:var(--teal);background:var(--teal-dim)}
+.ktab-emoji{font-size:22px;margin-bottom:4px}
+.ktab-label{font-family:'Fredoka',sans-serif;font-size:12px;font-weight:700;color:var(--muted)}
+.ktab.active .ktab-label{color:var(--teal)}
+.ktab-count{font-size:10px;font-weight:700;color:var(--muted);margin-top:2px}
+.ktab.active .ktab-count{color:var(--teal)}
+.king-row{display:flex;align-items:center;gap:12px;padding:11px 20px;border-bottom:1px solid var(--border)}
+.king-row:last-child{border-bottom:none}
+.king-icon{width:42px;height:42px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.king-name{font-size:13px;font-weight:700;color:var(--txt)}
+.king-conf{font-size:11px;color:var(--muted);margin-top:1px}
+.empty-state{text-align:center;padding:40px 20px}
+.empty-emoji{font-size:48px;margin-bottom:12px}
+.empty-title{font-family:'Fredoka',sans-serif;font-size:18px;font-weight:700;color:var(--txt);margin-bottom:6px}
+.empty-sub{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:20px}
 /* IMPORT */
 .ihead{padding:20px 20px 0;display:flex;align-items:center;gap:12px;margin-bottom:22px}
 .ititle{font-family:'Fredoka',sans-serif;font-size:20px;font-weight:700;color:var(--txt)}
@@ -90,7 +117,7 @@ html,body{height:100%;background:#c8ede9;font-family:'Nunito',sans-serif;color:v
 .elabel{font-size:13px;font-weight:600;color:var(--muted)}
 .estep.done .elabel{color:var(--green)}
 .estep.active .elabel{color:var(--teal-dark)}
-/* RECIPE */
+/* RECIPE DETAIL */
 #s-recipe{overflow-y:auto}
 .rhero{padding:22px 20px 16px;display:flex;align-items:flex-start;gap:14px}
 .rebox{width:66px;height:66px;border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:34px;flex-shrink:0}
@@ -107,15 +134,19 @@ html,body{height:100%;background:#c8ede9;font-family:'Nunito',sans-serif;color:v
 .ingbox{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
 .ingname{font-size:13px;font-weight:700;color:var(--txt)}
 .ingamt{font-size:11px;color:var(--muted);margin-top:1px}
+.step-row{display:flex;gap:12px;padding:0 20px;margin-bottom:16px;align-items:flex-start}
+.step-num{width:28px;height:28px;border-radius:50%;background:var(--teal);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;margin-top:2px}
+.step-text{font-size:13px;color:var(--muted);line-height:1.7;flex:1}
 /* SCAN */
 .scanscreen{background:#090d0c;min-height:100vh;position:relative;overflow:hidden}
 .sambient{position:absolute;inset:0;pointer-events:none}
 .stopbar{position:relative;z-index:20;padding:16px 20px;display:flex;align-items:center;gap:12px}
-.sphase{color:rgba(255,255,255,.65);font-size:12px;font-weight:600}
+.sphase{color:rgba(255,255,255,.65);font-size:12px;font-weight:600;flex:1}
+.sskip{color:rgba(255,255,255,.5);font-size:12px;font-weight:600;cursor:pointer;text-decoration:underline}
 .sinstr{position:relative;z-index:20;text-align:center;padding:0 20px 14px}
 .sinstr h3{font-family:'Fredoka',sans-serif;font-size:21px;font-weight:700;color:#fff}
 .sinstr p{font-size:12px;color:rgba(255,255,255,.5);margin-top:4px;line-height:1.5}
-.vf{position:relative;margin:0 20px;border-radius:22px;overflow:hidden;height:250px;background:rgba(255,255,255,.025);border:1.5px solid rgba(0,194,178,.35);z-index:20}
+.vf{position:relative;margin:0 20px;border-radius:22px;overflow:hidden;height:240px;background:rgba(255,255,255,.025);border:1.5px solid rgba(0,194,178,.35);z-index:20}
 .vfgrid{position:absolute;inset:0;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr)}
 .vfcell{border:.5px solid rgba(255,255,255,.055)}
 .vfline{position:absolute;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#00C2B2,transparent);box-shadow:0 0 10px rgba(0,194,178,.6);animation:scanLine 2.5s ease-in-out infinite}
@@ -124,24 +155,28 @@ html,body{height:100%;background:#c8ede9;font-family:'Nunito',sans-serif;color:v
 .vfc.tr{top:10px;right:10px;border-top:3px solid #00C2B2;border-right:3px solid #00C2B2;border-radius:0 4px 0 0}
 .vfc.bl{bottom:10px;left:10px;border-bottom:3px solid #00C2B2;border-left:3px solid #00C2B2;border-radius:0 0 0 4px}
 .vfc.br{bottom:10px;right:10px;border-bottom:3px solid #00C2B2;border-right:3px solid #00C2B2;border-radius:0 0 4px 0}
-.vfph{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:52px;opacity:.1}
+.vfph{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:48px;opacity:.1}
 .dbubble{position:absolute;transform:translate(-50%,-50%);background:rgba(0,0,0,.78);border-radius:12px;padding:6px 10px;border:1.5px solid rgba(0,194,178,.65);backdrop-filter:blur(8px);display:flex;align-items:center;gap:6px;animation:fadeInBubble .35s ease forwards;z-index:5}
 .bname{color:#fff;font-size:10px;font-weight:700}
 .bconf{color:#00C2B2;font-size:9px}
-.sbottom{position:relative;z-index:20;padding:14px 20px}
-.pdots{display:flex;gap:8px;justify-content:center;margin-bottom:12px}
+.sbottom{position:relative;z-index:20;padding:12px 20px}
+.pdots{display:flex;gap:8px;justify-content:center;margin-bottom:10px}
 .pdot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.2);transition:background .3s}
 .pdot.active{background:#00C2B2}
 .pdot.done{background:rgba(0,194,178,.45)}
-.dcount{text-align:center;font-family:'Fredoka',sans-serif;font-size:15px;font-weight:700;color:#00C2B2;margin-bottom:10px}
-.schips{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;margin-bottom:14px;scrollbar-width:none}
+.dcount{text-align:center;font-family:'Fredoka',sans-serif;font-size:14px;font-weight:700;color:#00C2B2;margin-bottom:8px}
+.schips{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;margin-bottom:12px;scrollbar-width:none}
 .schips::-webkit-scrollbar{display:none}
 .schip{flex-shrink:0;background:rgba(0,0,0,.65);border:1px solid rgba(0,194,178,.4);border-radius:10px;padding:5px 10px;display:flex;align-items:center;gap:5px}
 .schip span{color:#fff;font-size:11px;font-weight:600}
-.shutwrap{display:flex;flex-direction:column;align-items:center;gap:8px}
-.shutter{width:66px;height:66px;border-radius:50%;border:3px solid #00C2B2;background:rgba(0,194,178,.15);display:flex;align-items:center;justify-content:center;font-size:28px;cursor:pointer;transition:transform .15s}
+.scan-actions{display:flex;gap:10px;align-items:center;justify-content:center}
+.shutwrap{display:flex;flex-direction:column;align-items:center;gap:6px}
+.shutter{width:62px;height:62px;border-radius:50%;border:3px solid #00C2B2;background:rgba(0,194,178,.15);display:flex;align-items:center;justify-content:center;font-size:26px;cursor:pointer;transition:transform .15s}
 .shutter:active{transform:scale(.9)}
-.shutlabel{color:rgba(255,255,255,.5);font-size:10px;font-weight:600;letter-spacing:.5px}
+.shutlabel{color:rgba(255,255,255,.5);font-size:9px;font-weight:600;letter-spacing:.5px;text-align:center}
+.gallery-btn{display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer}
+.gallery-icon{width:46px;height:46px;border-radius:50%;border:2px solid rgba(255,255,255,.25);background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;font-size:20px}
+.gallery-label{color:rgba(255,255,255,.4);font-size:9px;font-weight:600;letter-spacing:.5px}
 .finh{display:none}
 .pvf{border-color:rgba(255,159,67,.35)}
 .pvfl{background:linear-gradient(90deg,transparent,#FF9F43,transparent);box-shadow:0 0 10px rgba(255,159,67,.6)}
@@ -151,6 +186,7 @@ html,body{height:100%;background:#c8ede9;font-family:'Nunito',sans-serif;color:v
 .pshut{border-color:#FF9F43;background:rgba(255,159,67,.15)}
 .pbubble{border-color:rgba(255,159,67,.65)}
 .pbubble .bconf{color:#FF9F43}
+.pgallery{border-color:rgba(255,159,67,.25);background:rgba(255,159,67,.08)}
 /* PROCESSING */
 #s-processing{background:#090d0c;align-items:center;justify-content:center;padding:40px 24px;text-align:center}
 .prospin{font-size:52px;margin-bottom:22px;animation:pulse 1.3s ease infinite}
@@ -244,12 +280,12 @@ html,body{height:100%;background:#c8ede9;font-family:'Nunito',sans-serif;color:v
     <div class="qcard" onclick="goTo('s-import')">
       <div class="qicon" style="background:#F0EEFF">&#128279;</div>
       <div class="qlabel">Import Recipe</div>
-      <div class="qsub">Instagram · Any URL</div>
+      <div class="qsub">URL or recipe text</div>
     </div>
-    <div class="qcard" onclick="goTo('s-scan-fridge')">
+    <div class="qcard" onclick="startScan()">
       <div class="qicon" style="background:#E0FAF8">&#128248;</div>
       <div class="qlabel">Scan Kitchen</div>
-      <div class="qsub">Fridge · Pantry</div>
+      <div class="qsub">Fridge + Pantry</div>
     </div>
   </div>
   <div class="slabel">Your Kollection</div>
@@ -264,13 +300,42 @@ html,body{height:100%;background:#c8ede9;font-family:'Nunito',sans-serif;color:v
       <div class="rmeta"><div class="rtitle">Chicken Tikka Masala</div><div class="rsub">@tastemade · Indian · 45 min</div></div>
       <div class="mpill" style="background:var(--amber-bg);color:var(--amber)">Need 3</div>
     </div>
-    <div class="rrow" onclick="loadDemo()">
-      <div class="remoji" style="background:#FFF0F7">&#129367;</div>
-      <div class="rmeta"><div class="rtitle">Spinach Parmesan Salad</div><div class="rsub">@ottolenghi · Salads · 10 min</div></div>
-      <div class="mpill" style="background:var(--green-bg);color:var(--green)">Ready</div>
-    </div>
   </div>
   <div style="height:24px"></div>
+</div>
+</div>
+
+<!-- KITCHEN -->
+<div id="s-kitchen" class="screen">
+<div class="ss">
+  <div style="padding:20px 20px 0;display:flex;justify-content:space-between;align-items:center">
+    <div>
+      <div style="font-family:'Fredoka',sans-serif;font-size:24px;font-weight:700;color:var(--txt)">My Kitchen</div>
+      <div style="font-size:12px;color:var(--muted);margin-top:2px" id="kitchen-subtitle">Scan your fridge and pantry to get started</div>
+    </div>
+    <div onclick="startScan()" style="background:var(--teal);color:#fff;border-radius:12px;padding:8px 14px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Fredoka',sans-serif">+ Scan</div>
+  </div>
+  <div class="ktabs">
+    <div class="ktab active" id="ktab-fridge" onclick="showKitchenTab('fridge')">
+      <div class="ktab-emoji">&#10052;</div>
+      <div class="ktab-label">Fridge</div>
+      <div class="ktab-count" id="fridge-tab-count">0 items</div>
+    </div>
+    <div class="ktab" id="ktab-pantry" onclick="showKitchenTab('pantry')">
+      <div class="ktab-emoji">&#128452;</div>
+      <div class="ktab-label">Pantry</div>
+      <div class="ktab-count" id="pantry-tab-count">0 items</div>
+    </div>
+  </div>
+  <div id="kitchen-content" style="margin-top:14px">
+    <div class="empty-state" id="kitchen-empty">
+      <div class="empty-emoji">&#128248;</div>
+      <div class="empty-title">Nothing here yet</div>
+      <div class="empty-sub">Tap Scan to photograph your fridge and pantry. Kai will identify everything inside.</div>
+      <button class="bp" onclick="startScan()" style="width:auto;padding:12px 24px">Scan my kitchen</button>
+    </div>
+    <div id="kitchen-items" style="display:none;background:var(--card);margin:0 20px;border-radius:18px;border:1px solid var(--border)"></div>
+  </div>
 </div>
 </div>
 
@@ -279,24 +344,28 @@ html,body{height:100%;background:#c8ede9;font-family:'Nunito',sans-serif;color:v
 <div class="ss">
   <div class="ihead">
     <div class="bbl" onclick="goTo('s-home')"><svg width="14" height="14" fill="none" stroke="var(--txt)" stroke-width="2.5" viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-    <div><div class="ititle">Import a Recipe</div><div class="isub">Paste any recipe link or Instagram URL</div></div>
+    <div><div class="ititle">Import a Recipe</div><div class="isub">Paste a URL or describe the dish</div></div>
   </div>
   <div class="urlbox">
     <span style="font-size:18px">&#128279;</span>
-    <input id="url-input" type="url" placeholder="https://www.instagram.com/p/...">
+    <input id="url-input" type="url" placeholder="https://www.example.com/recipe...">
     <span style="font-size:15px;cursor:pointer;color:var(--muted)" onclick="document.getElementById('url-input').value=''">x</span>
   </div>
   <div class="tipbox">
     <div class="tipicon">*</div>
-    <p class="tiptext"><strong>Kai tip:</strong> Works with Instagram posts, food blogs, and any recipe page. Copy the link, paste it here.</p>
+    <p class="tiptext"><strong>Kai tip:</strong> Works great with food blogs and recipe sites. For Instagram, copy the recipe text from the caption and paste it below instead.</p>
   </div>
-  <div style="padding:0 20px 16px"><button class="bp" onclick="startExtract()">Extract Recipe with Kai</button></div>
+  <div style="padding:0 20px 10px"><button class="bp" onclick="startExtract()">Extract Recipe with Kai</button></div>
+  <div class="ordiv">or paste recipe text / describe a dish</div>
+  <div style="margin:0 20px 10px">
+    <textarea id="text-input" placeholder="e.g. Creamy garlic pasta with parmesan, butter, heavy cream..." style="width:100%;background:var(--card);border:2px solid var(--border);border-radius:14px;padding:13px 16px;font-size:13px;font-family:'Nunito',sans-serif;color:var(--txt);outline:none;resize:none;height:90px;transition:border-color .2s" onfocus="this.style.borderColor='var(--teal)'" onblur="this.style.borderColor='var(--border)'"></textarea>
+  </div>
+  <div style="padding:0 20px 16px"><button class="bp" style="background:var(--lilac)" onclick="startTextExtract()">Generate Recipe from Text</button></div>
   <div class="ordiv">or jump to a saved recipe</div>
   <div style="display:flex;flex-wrap:wrap;gap:8px;padding:0 20px 24px">
     <div class="chip" onclick="loadDemo()">Creamy Garlic Pasta</div>
     <div class="chip" onclick="loadDemo()">Chicken Tikka</div>
     <div class="chip" onclick="loadDemo()">Spinach Salad</div>
-    <div class="chip" onclick="loadDemo()">French Omelette</div>
   </div>
 </div>
 </div>
@@ -313,7 +382,7 @@ html,body{height:100%;background:#c8ede9;font-family:'Nunito',sans-serif;color:v
   </div>
 </div>
 
-<!-- RECIPE -->
+<!-- RECIPE DETAIL -->
 <div id="s-recipe" class="screen">
 <div class="ss">
   <div style="padding:20px 20px 0;display:flex;align-items:center;gap:12px;margin-bottom:4px">
@@ -335,20 +404,12 @@ html,body{height:100%;background:#c8ede9;font-family:'Nunito',sans-serif;color:v
     <div class="istat"><div class="istatnum" id="ing-likely" style="color:var(--green)">6</div><div class="istatlabel">likely have</div></div>
     <div class="istat"><div class="istatnum" id="ing-check" style="color:var(--coral)">3</div><div class="istatlabel">to check</div></div>
   </div>
-  <div style="font-family:'Fredoka',sans-serif;font-size:16px;font-weight:700;color:var(--txt);padding:0 20px;margin-bottom:10px">Ingredients Kai found</div>
-  <div class="ingcard" id="ing-list">
-    <div class="ingrow"><div class="ingbox" style="background:#FFF4E6">&#127837;</div><div><div class="ingname">Spaghetti</div><div class="ingamt">200g</div></div></div>
-    <div class="ingrow"><div class="ingbox" style="background:#FFF8E7">&#129476;</div><div><div class="ingname">Garlic cloves</div><div class="ingamt">4 cloves</div></div></div>
-    <div class="ingrow"><div class="ingbox" style="background:#FFFBF0">&#129480;</div><div><div class="ingname">Butter</div><div class="ingamt">3 tbsp</div></div></div>
-    <div class="ingrow"><div class="ingbox" style="background:#FFF5E6">&#129472;</div><div><div class="ingname">Parmesan</div><div class="ingamt">50g grated</div></div></div>
-    <div class="ingrow"><div class="ingbox" style="background:#FFF0F0">&#129371;</div><div><div class="ingname">Heavy cream</div><div class="ingamt">100ml</div></div></div>
-    <div class="ingrow"><div class="ingbox" style="background:#F0F8FF">&#129474;</div><div><div class="ingname">Salt</div><div class="ingamt">to taste</div></div></div>
-    <div class="ingrow"><div class="ingbox" style="background:#F5F5F5">&#129403;</div><div><div class="ingname">Black pepper</div><div class="ingamt">to taste</div></div></div>
-    <div class="ingrow"><div class="ingbox" style="background:#E8F8F0">&#127807;</div><div><div class="ingname">Fresh parsley</div><div class="ingamt">handful</div></div></div>
-    <div class="ingrow"><div class="ingbox" style="background:#F8F0FF">&#129703;</div><div><div class="ingname">Pasta water</div><div class="ingamt">half cup</div></div></div>
-  </div>
-  <div style="padding:0 20px 28px;display:flex;flex-direction:column;gap:10px">
-    <button class="bp" onclick="goTo('s-scan-fridge')">Now scan your kitchen</button>
+  <div style="font-family:'Fredoka',sans-serif;font-size:16px;font-weight:700;color:var(--txt);padding:0 20px;margin-bottom:10px">Ingredients</div>
+  <div class="ingcard" id="ing-list"></div>
+  <div style="font-family:'Fredoka',sans-serif;font-size:16px;font-weight:700;color:var(--txt);padding:0 20px;margin-bottom:14px;margin-top:4px">How to Cook</div>
+  <div id="steps-list"></div>
+  <div style="padding:0 20px 28px;display:flex;flex-direction:column;gap:10px;margin-top:8px">
+    <button class="bp" onclick="startScan()">Now scan your kitchen</button>
     <button class="bo" onclick="goTo('s-home')">Save for later</button>
   </div>
 </div>
@@ -360,6 +421,7 @@ html,body{height:100%;background:#c8ede9;font-family:'Nunito',sans-serif;color:v
   <div class="stopbar">
     <div class="bb" onclick="goTo('s-recipe')"><svg width="14" height="14" fill="none" stroke="#fff" stroke-width="2.5" viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     <div class="sphase">Step 1 of 2 - Fridge</div>
+    <div class="sskip" onclick="skipFridge()">Skip</div>
   </div>
   <div class="sinstr"><h3>Show me your fridge</h3><p>Open your fridge, take a photo.<br>Kai will spot everything inside.</p></div>
   <div class="vf" id="vf-fridge">
@@ -372,11 +434,18 @@ html,body{height:100%;background:#c8ede9;font-family:'Nunito',sans-serif;color:v
     <div class="pdots"><div class="pdot active"></div><div class="pdot"></div></div>
     <div class="dcount" id="fridge-count">Ready - tap to photograph your fridge</div>
     <div class="schips" id="fridge-chips"></div>
-    <div class="shutwrap">
-      <label for="fridge-file" class="shutter">&#128247;</label>
-      <div class="shutlabel">TAP TO PHOTOGRAPH</div>
+    <div class="scan-actions">
+      <div class="gallery-btn">
+        <label for="fridge-gallery" class="gallery-icon">&#128444;</label>
+        <div class="gallery-label">GALLERY</div>
+        <input type="file" id="fridge-gallery" class="finh" accept="image/*" onchange="handleFridgeScan(this)">
+      </div>
+      <div class="shutwrap">
+        <label for="fridge-file" class="shutter">&#128247;</label>
+        <div class="shutlabel">TAKE PHOTO</div>
+        <input type="file" id="fridge-file" class="finh" accept="image/*" capture="environment" onchange="handleFridgeScan(this)">
+      </div>
     </div>
-    <input type="file" id="fridge-file" class="finh" accept="image/*" capture="environment" onchange="handleFridgeScan(this)">
   </div>
 </div>
 
@@ -386,6 +455,7 @@ html,body{height:100%;background:#c8ede9;font-family:'Nunito',sans-serif;color:v
   <div class="stopbar">
     <div class="bb" onclick="goTo('s-scan-fridge')"><svg width="14" height="14" fill="none" stroke="#fff" stroke-width="2.5" viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     <div class="sphase">Step 2 of 2 - Pantry</div>
+    <div class="sskip" onclick="skipPantry()">Skip</div>
   </div>
   <div class="sinstr"><h3>Now your pantry</h3><p>Pasta, oils, cans, spices - Kai needs<br>to see everything to match your recipe.</p></div>
   <div class="vf pvf" id="vf-pantry">
@@ -398,11 +468,18 @@ html,body{height:100%;background:#c8ede9;font-family:'Nunito',sans-serif;color:v
     <div class="pdots"><div class="pdot done"></div><div class="pdot active"></div></div>
     <div class="dcount pdcount" id="pantry-count">Ready - tap to photograph your pantry</div>
     <div class="schips" id="pantry-chips"></div>
-    <div class="shutwrap">
-      <label for="pantry-file" class="shutter pshut">&#128247;</label>
-      <div class="shutlabel">TAP TO PHOTOGRAPH</div>
+    <div class="scan-actions">
+      <div class="gallery-btn">
+        <label for="pantry-gallery" class="gallery-icon pgallery">&#128444;</label>
+        <div class="gallery-label">GALLERY</div>
+        <input type="file" id="pantry-gallery" class="finh" accept="image/*" onchange="handlePantryScan(this)">
+      </div>
+      <div class="shutwrap">
+        <label for="pantry-file" class="shutter pshut">&#128247;</label>
+        <div class="shutlabel">TAKE PHOTO</div>
+        <input type="file" id="pantry-file" class="finh" accept="image/*" capture="environment" onchange="handlePantryScan(this)">
+      </div>
     </div>
-    <input type="file" id="pantry-file" class="finh" accept="image/*" capture="environment" onchange="handlePantryScan(this)">
   </div>
 </div>
 
@@ -427,7 +504,7 @@ html,body{height:100%;background:#c8ede9;font-family:'Nunito',sans-serif;color:v
   </div>
   <div class="vcard cc" id="verdict-card">
     <div class="vemoji" id="verdict-emoji">&#9989;</div>
-    <div><div class="vmain" id="verdict-main">You can make this tonight</div><div class="vsub" id="verdict-sub">You have 7 of 9 ingredients. Missing 2 items.</div></div>
+    <div><div class="vmain" id="verdict-main">You can make this tonight</div><div class="vsub" id="verdict-sub">You have 7 of 9 ingredients.</div></div>
   </div>
   <div class="mstats">
     <div class="mstat"><div class="mstatnum" id="stat-have" style="color:var(--green)">7</div><div class="mstatlabel">you have</div></div>
@@ -438,7 +515,7 @@ html,body{height:100%;background:#c8ede9;font-family:'Nunito',sans-serif;color:v
   <div class="msec" id="miss-section"><div class="msectitle">You are missing</div><div id="miss-list"></div></div>
   <div class="kaitip">
     <div style="font-size:18px;flex-shrink:0">*</div>
-    <div class="kaitiptext" id="kai-tip-text"><strong>Kai says:</strong> You can skip parsley - it is garnish only. Sub heavy cream with milk plus a teaspoon of flour.</div>
+    <div class="kaitiptext" id="kai-tip-text"><strong>Kai says:</strong> You can skip parsley. Sub heavy cream with milk plus a teaspoon of flour.</div>
   </div>
 </div>
 <div class="msticky">
@@ -457,20 +534,91 @@ html,body{height:100%;background:#c8ede9;font-family:'Nunito',sans-serif;color:v
   </div>
   <div style="width:100%;display:flex;flex-direction:column;gap:10px">
     <button class="bp" onclick="goTo('s-import')">Find another recipe</button>
-    <button class="bo" onclick="goTo('s-home')">Back to kitchen</button>
+    <button class="bo" onclick="goTo('s-kitchen')">View my kitchen</button>
   </div>
 </div>
+
+<!-- NAV BAR -->
+<nav class="navbar" id="main-nav">
+  <div class="navitem active" id="nav-home" onclick="navTo('home')">
+    <div class="navitem-icon">&#127968;</div>
+    <div class="navitem-label">Home</div>
+  </div>
+  <div class="navitem" id="nav-kitchen" onclick="navTo('kitchen')">
+    <div class="navitem-icon">&#10052;</div>
+    <div class="navitem-label">Kitchen</div>
+  </div>
+  <div class="nav-scan-btn" onclick="startScan()">&#128247;</div>
+  <div class="navitem" id="nav-import" onclick="navTo('import')">
+    <div class="navitem-icon">&#128279;</div>
+    <div class="navitem-label">Import</div>
+  </div>
+  <div class="navitem" id="nav-kollection" onclick="navTo('home')">
+    <div class="navitem-icon">&#128218;</div>
+    <div class="navitem-label">Recipes</div>
+  </div>
+</nav>
 
 </div>
 <script>
 var currentRecipe = null;
 var fridgeItems = [];
 var pantryItems = [];
+var activeKitchenTab = 'fridge';
+
+// Load saved kitchen from localStorage
+function loadKitchen() {
+  var saved = localStorage.getItem('kai_fridge');
+  if (saved) try { fridgeItems = JSON.parse(saved); } catch(e) {}
+  var saved2 = localStorage.getItem('kai_pantry');
+  if (saved2) try { pantryItems = JSON.parse(saved2); } catch(e) {}
+  updateKitchenCounts();
+}
+
+function saveKitchen() {
+  localStorage.setItem('kai_fridge', JSON.stringify(fridgeItems));
+  localStorage.setItem('kai_pantry', JSON.stringify(pantryItems));
+  updateKitchenCounts();
+}
+
+function updateKitchenCounts() {
+  document.getElementById('fridge-tab-count').textContent = fridgeItems.length + ' items';
+  document.getElementById('pantry-tab-count').textContent = pantryItems.length + ' items';
+  var total = fridgeItems.length + pantryItems.length;
+  document.getElementById('kitchen-subtitle').textContent = total > 0 ? total + ' items across fridge and pantry' : 'Scan your fridge and pantry to get started';
+}
+
+function showKitchenTab(tab) {
+  activeKitchenTab = tab;
+  document.getElementById('ktab-fridge').classList.toggle('active', tab === 'fridge');
+  document.getElementById('ktab-pantry').classList.toggle('active', tab === 'pantry');
+  renderKitchenItems();
+}
+
+function renderKitchenItems() {
+  var items = activeKitchenTab === 'fridge' ? fridgeItems : pantryItems;
+  var emptyEl = document.getElementById('kitchen-empty');
+  var itemsEl = document.getElementById('kitchen-items');
+  if (items.length === 0) {
+    emptyEl.style.display = 'block';
+    itemsEl.style.display = 'none';
+  } else {
+    emptyEl.style.display = 'none';
+    itemsEl.style.display = 'block';
+    itemsEl.innerHTML = items.map(function(item) {
+      return '<div class="king-row">' +
+        '<div class="king-icon" style="background:' + (activeKitchenTab === 'fridge' ? 'var(--sky-bg)' : 'var(--amber-bg)') + '">' + (item.emoji || '') + '</div>' +
+        '<div><div class="king-name">' + item.name + '</div><div class="king-conf">' + item.conf + '% confidence</div></div>' +
+        '</div>';
+    }).join('');
+  }
+}
 
 var DEMO = {
   title: 'Creamy Garlic Butter Pasta',
   emoji: '',
   source: '@foodwith_maria on Instagram',
+  time: '20 min', cuisine: 'Italian', diff: 'Easy', serves: '2',
   ingredients: [
     {emoji:'', name:'Spaghetti', amount:'200g', have:true},
     {emoji:'', name:'Garlic cloves', amount:'4 cloves', have:true},
@@ -482,15 +630,36 @@ var DEMO = {
     {emoji:'', name:'Fresh parsley', amount:'handful', have:false},
     {emoji:'', name:'Pasta water', amount:'half cup', have:true}
   ],
+  steps: [
+    'Boil a large pot of salted water and cook spaghetti until al dente. Reserve half a cup of pasta water before draining.',
+    'While pasta cooks, melt butter in a large pan over medium heat. Add minced garlic and cook for 2 minutes until fragrant but not browned.',
+    'Pour in the heavy cream and stir to combine. Simmer for 3 minutes until the sauce thickens slightly.',
+    'Add the drained pasta to the pan and toss well to coat. Add a splash of pasta water to loosen the sauce if needed.',
+    'Remove from heat and stir in the grated parmesan. Season generously with black pepper and top with fresh parsley to serve.'
+  ],
   kaiTip: 'You can skip parsley - it is garnish only. Sub heavy cream with milk plus a teaspoon of flour for a lighter sauce.'
 };
+
+var FULLSCREEN_SCREENS = ['s-scan-fridge', 's-scan-pantry', 's-processing', 's-extracting', 's-cooked'];
 
 function goTo(id) {
   document.querySelectorAll('.screen').forEach(function(s) { s.classList.remove('active'); });
   var el = document.getElementById(id);
   if (el) el.classList.add('active');
+  var nav = document.getElementById('main-nav');
+  nav.style.display = FULLSCREEN_SCREENS.indexOf(id) !== -1 ? 'none' : 'flex';
   window.scrollTo(0, 0);
 }
+
+function navTo(tab) {
+  document.querySelectorAll('.navitem').forEach(function(n) { n.classList.remove('active'); });
+  document.getElementById('nav-' + tab).classList.add('active');
+  if (tab === 'kitchen') { renderKitchenItems(); goTo('s-kitchen'); }
+  else if (tab === 'import') goTo('s-import');
+  else goTo('s-home');
+}
+
+function startScan() { goTo('s-scan-fridge'); }
 
 function showToast(msg, dur) {
   dur = dur || 2500;
@@ -521,7 +690,22 @@ function startExtract() {
     renderRecipe(r);
     goTo('s-recipe');
   }).catch(function() {
-    showToast('Could not read that link - try another');
+    showToast('Could not read that link - try pasting the recipe text instead');
+    goTo('s-import');
+  });
+}
+
+function startTextExtract() {
+  var text = document.getElementById('text-input').value.trim();
+  if (!text) { showToast('Type or paste a recipe or dish name first'); return; }
+  goTo('s-extracting');
+  runExtractSteps();
+  callApi('extract', { text: text }).then(function(r) {
+    currentRecipe = r;
+    renderRecipe(r);
+    goTo('s-recipe');
+  }).catch(function() {
+    showToast('Could not generate recipe - try again');
     goTo('s-import');
   });
 }
@@ -532,8 +716,7 @@ function runExtractSteps() {
     setTimeout(function() {
       if (i > 0) {
         var p = document.getElementById(steps[i - 1]);
-        p.classList.remove('active');
-        p.classList.add('done');
+        p.classList.remove('active'); p.classList.add('done');
         p.querySelector('.edot').textContent = 'ok';
       }
       document.getElementById(id).classList.add('active');
@@ -558,6 +741,14 @@ function renderRecipe(r) {
   document.getElementById('ing-list').innerHTML = r.ingredients.map(function(i) {
     return '<div class="ingrow"><div class="ingbox" style="background:#FFF8F0">' + (i.emoji || '') + '</div><div><div class="ingname">' + i.name + '</div><div class="ingamt">' + i.amount + '</div></div></div>';
   }).join('');
+  var stepsEl = document.getElementById('steps-list');
+  if (r.steps && r.steps.length > 0) {
+    stepsEl.innerHTML = r.steps.map(function(step, i) {
+      return '<div class="step-row"><div class="step-num">' + (i + 1) + '</div><div class="step-text">' + step + '</div></div>';
+    }).join('');
+  } else {
+    stepsEl.innerHTML = '<div style="padding:0 20px 16px;font-size:13px;color:var(--muted)">No steps available for this recipe.</div>';
+  }
 }
 
 function toBase64(file) {
@@ -579,8 +770,7 @@ function addBubble(vf, item, i, isPantry) {
   var p = POSITIONS[i % POSITIONS.length];
   var b = document.createElement('div');
   b.className = 'dbubble' + (isPantry ? ' pbubble' : '');
-  b.style.left = p.x + '%';
-  b.style.top = p.y + '%';
+  b.style.left = p.x + '%'; b.style.top = p.y + '%';
   b.innerHTML = '<span style="font-size:14px">' + (item.emoji || '') + '</span><div><div class="bname">' + item.name + '</div><div class="bconf">' + item.conf + '% match</div></div>';
   vf.appendChild(b);
 }
@@ -605,6 +795,7 @@ function handleFridgeScan(input) {
   }).then(function(items) {
     if (!Array.isArray(items)) items = items.items || [];
     fridgeItems = items;
+    saveKitchen();
     items.forEach(function(item, i) {
       setTimeout(function() {
         addBubble(vf, item, i, false);
@@ -632,6 +823,7 @@ function handlePantryScan(input) {
   }).then(function(items) {
     if (!Array.isArray(items)) items = items.items || [];
     pantryItems = items;
+    saveKitchen();
     items.forEach(function(item, i) {
       setTimeout(function() {
         addBubble(vf, item, i, true);
@@ -650,11 +842,25 @@ function handlePantryScan(input) {
   });
 }
 
+function skipFridge() {
+  fridgeItems = [];
+  saveKitchen();
+  goTo('s-scan-pantry');
+}
+
+function skipPantry() {
+  pantryItems = [];
+  saveKitchen();
+  goTo('s-processing');
+  updateProcessing();
+  setTimeout(function() { buildMatchScreen(); goTo('s-match'); }, 2200);
+}
+
 function updateProcessing() {
-  document.getElementById('proc-fridge-label').textContent = 'Fridge - ' + fridgeItems.length + ' items found';
+  document.getElementById('proc-fridge-label').textContent = fridgeItems.length > 0 ? 'Fridge - ' + fridgeItems.length + ' items found' : 'Fridge - skipped';
   document.getElementById('proc-fridge-count').textContent = 'done';
   setTimeout(function() {
-    document.getElementById('proc-pantry-label').textContent = 'Pantry - ' + pantryItems.length + ' items found';
+    document.getElementById('proc-pantry-label').textContent = pantryItems.length > 0 ? 'Pantry - ' + pantryItems.length + ' items found' : 'Pantry - skipped';
     document.getElementById('proc-pantry-count').textContent = 'done';
   }, 800);
 }
@@ -665,8 +871,7 @@ function buildMatchScreen() {
   document.getElementById('match-recipe-name').textContent = r.title;
   document.getElementById('match-recipe-source').textContent = r.source || '';
   document.getElementById('match-recipe-icon').textContent = r.emoji || '';
-  var have = [];
-  var miss = [];
+  var have = []; var miss = [];
   r.ingredients.forEach(function(ing) {
     var n = ing.name.toLowerCase();
     var found = kitchen.some(function(k) {
@@ -704,9 +909,7 @@ function buildMatchScreen() {
     vs.textContent = 'You have ' + have.length + ' of ' + r.ingredients.length + ' ingredients.';
     ms.style.display = 'block';
   }
-  if (r.kaiTip) {
-    document.getElementById('kai-tip-text').innerHTML = '<strong>Kai says:</strong> ' + r.kaiTip;
-  }
+  if (r.kaiTip) document.getElementById('kai-tip-text').innerHTML = '<strong>Kai says:</strong> ' + r.kaiTip;
 }
 
 function markCooked() {
@@ -717,6 +920,7 @@ function markCooked() {
 }
 
 window.addEventListener('load', function() {
+  loadKitchen();
   setTimeout(function() {
     document.getElementById('loading').style.display = 'none';
     goTo('s-home');
