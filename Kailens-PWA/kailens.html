@@ -29,7 +29,7 @@ html,body{height:100%;background:#c8ede9;font-family:'Nunito',sans-serif;color:v
 @keyframes scanLine{0%{top:10%}50%{top:75%}100%{top:10%}}
 @keyframes celebrate{0%{transform:scale(1)}40%{transform:scale(1.15)}100%{transform:scale(1)}}
 @keyframes loadBar{from{width:0}to{width:100%}}
-.ss{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:80px}
+.ss{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:90px}
 .ss::-webkit-scrollbar{display:none}
 .bbl{width:36px;height:36px;border-radius:50%;background:var(--card2);border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0}
 .bb{width:36px;height:36px;border-radius:50%;background:rgba(0,0,0,0.38);border:1px solid rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0}
@@ -68,7 +68,7 @@ html,body{height:100%;background:#c8ede9;font-family:'Nunito',sans-serif;color:v
 .rtitle{font-size:13px;font-weight:700;color:var(--txt)}
 .rsub{font-size:11px;color:var(--muted);margin-top:2px}
 .mpill{font-size:10px;font-weight:700;padding:4px 9px;border-radius:8px;white-space:nowrap}
-/* KITCHEN SCREEN */
+/* KITCHEN */
 .ktabs{display:flex;gap:10px;padding:14px 20px 0}
 .ktab{flex:1;background:var(--card);border-radius:16px;border:1.5px solid var(--border);padding:12px 8px;text-align:center;cursor:pointer;transition:all .2s}
 .ktab.active{border-color:var(--teal);background:var(--teal-dim)}
@@ -77,15 +77,28 @@ html,body{height:100%;background:#c8ede9;font-family:'Nunito',sans-serif;color:v
 .ktab.active .ktab-label{color:var(--teal)}
 .ktab-count{font-size:10px;font-weight:700;color:var(--muted);margin-top:2px}
 .ktab.active .ktab-count{color:var(--teal)}
-.king-row{display:flex;align-items:center;gap:12px;padding:11px 20px;border-bottom:1px solid var(--border)}
+.king-row{display:flex;align-items:center;gap:12px;padding:11px 16px;border-bottom:1px solid var(--border)}
 .king-row:last-child{border-bottom:none}
-.king-icon{width:42px;height:42px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
-.king-name{font-size:13px;font-weight:700;color:var(--txt)}
+.king-icon{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.king-name{font-size:13px;font-weight:700;color:var(--txt);flex:1}
 .king-conf{font-size:11px;color:var(--muted);margin-top:1px}
+.king-del{width:28px;height:28px;border-radius:50%;background:var(--red-bg);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:12px;flex-shrink:0;border:none}
+.add-item-row{display:flex;gap:8px;padding:12px 16px;border-top:1.5px dashed var(--border)}
+.add-item-input{flex:1;background:transparent;border:none;outline:none;font-size:13px;font-family:'Nunito',sans-serif;color:var(--txt)}
+.add-item-input::placeholder{color:var(--muted)}
+.add-item-btn{background:var(--teal);color:#fff;border:none;border-radius:10px;padding:6px 14px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Fredoka',sans-serif;white-space:nowrap}
 .empty-state{text-align:center;padding:40px 20px}
 .empty-emoji{font-size:48px;margin-bottom:12px}
 .empty-title{font-family:'Fredoka',sans-serif;font-size:18px;font-weight:700;color:var(--txt);margin-bottom:6px}
 .empty-sub{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:20px}
+/* KOLLECTION */
+.koll-row{display:flex;align-items:center;gap:12px;padding:12px 20px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .15s;position:relative}
+.koll-row:active{background:var(--card2)}
+.koll-emoji{width:46px;height:46px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;background:var(--card2)}
+.koll-meta{flex:1}
+.koll-title{font-size:13px;font-weight:700;color:var(--txt)}
+.koll-sub{font-size:11px;color:var(--muted);margin-top:2px}
+.koll-del{width:28px;height:28px;border-radius:50%;background:var(--red-bg);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:12px;flex-shrink:0;border:none}
 /* IMPORT */
 .ihead{padding:20px 20px 0;display:flex;align-items:center;gap:12px;margin-bottom:22px}
 .ititle{font-family:'Fredoka',sans-serif;font-size:20px;font-weight:700;color:var(--txt)}
@@ -103,7 +116,7 @@ html,body{height:100%;background:#c8ede9;font-family:'Nunito',sans-serif;color:v
 .chip{background:var(--card);border:1.5px solid var(--border);border-radius:999px;padding:8px 14px;font-size:12px;font-weight:600;color:var(--txt);cursor:pointer;display:flex;align-items:center;gap:6px;transition:all .15s}
 .chip:active{border-color:var(--teal);color:var(--teal);background:var(--teal-dim)}
 /* EXTRACTING */
-#s-extracting{align-items:center;justify-content:center;padding:40px 24px;text-align:center}
+#s-extracting{background:var(--bg);align-items:center;justify-content:center;padding:40px 24px;text-align:center}
 .espin{width:72px;height:72px;border-radius:22px;background:linear-gradient(135deg,#00C2B2,#48DBBB);display:flex;align-items:center;justify-content:center;font-size:30px;margin:0 auto 24px;animation:pulse 1.4s ease infinite}
 .etitle{font-family:'Fredoka',sans-serif;font-size:23px;font-weight:700;color:var(--txt);margin-bottom:8px}
 .esub{font-size:13px;color:var(--muted);margin-bottom:32px}
@@ -118,7 +131,7 @@ html,body{height:100%;background:#c8ede9;font-family:'Nunito',sans-serif;color:v
 .estep.done .elabel{color:var(--green)}
 .estep.active .elabel{color:var(--teal-dark)}
 /* RECIPE DETAIL */
-#s-recipe{overflow-y:auto}
+#s-recipe{overflow-y:auto;padding-bottom:0}
 .rhero{padding:22px 20px 16px;display:flex;align-items:flex-start;gap:14px}
 .rebox{width:66px;height:66px;border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:34px;flex-shrink:0}
 .retitle{font-family:'Fredoka',sans-serif;font-size:21px;font-weight:700;color:var(--txt);line-height:1.3}
@@ -142,7 +155,7 @@ html,body{height:100%;background:#c8ede9;font-family:'Nunito',sans-serif;color:v
 .sambient{position:absolute;inset:0;pointer-events:none}
 .stopbar{position:relative;z-index:20;padding:16px 20px;display:flex;align-items:center;gap:12px}
 .sphase{color:rgba(255,255,255,.65);font-size:12px;font-weight:600;flex:1}
-.sskip{color:rgba(255,255,255,.5);font-size:12px;font-weight:600;cursor:pointer;text-decoration:underline}
+.sskip{color:rgba(255,255,255,.5);font-size:12px;font-weight:600;cursor:pointer;padding:4px 0}
 .sinstr{position:relative;z-index:20;text-align:center;padding:0 20px 14px}
 .sinstr h3{font-family:'Fredoka',sans-serif;font-size:21px;font-weight:700;color:#fff}
 .sinstr p{font-size:12px;color:rgba(255,255,255,.5);margin-top:4px;line-height:1.5}
@@ -270,37 +283,26 @@ html,body{height:100%;background:#c8ede9;font-family:'Nunito',sans-serif;color:v
     </div>
   </div>
   <p style="font-size:13px;color:var(--muted);margin-top:10px;padding:0 20px">What can you cook tonight?</p>
-  <div class="hero" onclick="goTo('s-import')">
+  <div class="hero" onclick="navTo('import')">
     <div class="hero-bg">&#127859;</div>
     <h2>Your recipe,<br>your kitchen,<br>right now.</h2>
     <p>Paste a recipe link. Snap your fridge and pantry.<br>Kai tells you exactly what you can make.</p>
     <button class="hero-btn">Start with a recipe</button>
   </div>
   <div class="qrow">
-    <div class="qcard" onclick="goTo('s-import')">
+    <div class="qcard" onclick="navTo('import')">
       <div class="qicon" style="background:#F0EEFF">&#128279;</div>
       <div class="qlabel">Import Recipe</div>
       <div class="qsub">URL or recipe text</div>
     </div>
-    <div class="qcard" onclick="startScan()">
+    <div class="qcard" onclick="startScanFrom('home')">
       <div class="qicon" style="background:#E0FAF8">&#128248;</div>
       <div class="qlabel">Scan Kitchen</div>
       <div class="qsub">Fridge + Pantry</div>
     </div>
   </div>
-  <div class="slabel">Your Kollection</div>
-  <div>
-    <div class="rrow" onclick="loadDemo()">
-      <div class="remoji" style="background:#FFF4E6">&#127837;</div>
-      <div class="rmeta"><div class="rtitle">Creamy Garlic Pasta</div><div class="rsub">@foodwith_maria · Italian · 20 min</div></div>
-      <div class="mpill" style="background:var(--green-bg);color:var(--green)">Ready</div>
-    </div>
-    <div class="rrow" onclick="loadDemo()">
-      <div class="remoji" style="background:#E0FAF8">&#127831;</div>
-      <div class="rmeta"><div class="rtitle">Chicken Tikka Masala</div><div class="rsub">@tastemade · Indian · 45 min</div></div>
-      <div class="mpill" style="background:var(--amber-bg);color:var(--amber)">Need 3</div>
-    </div>
-  </div>
+  <div class="slabel">Recent Recipes</div>
+  <div id="home-kollection"></div>
   <div style="height:24px"></div>
 </div>
 </div>
@@ -311,9 +313,9 @@ html,body{height:100%;background:#c8ede9;font-family:'Nunito',sans-serif;color:v
   <div style="padding:20px 20px 0;display:flex;justify-content:space-between;align-items:center">
     <div>
       <div style="font-family:'Fredoka',sans-serif;font-size:24px;font-weight:700;color:var(--txt)">My Kitchen</div>
-      <div style="font-size:12px;color:var(--muted);margin-top:2px" id="kitchen-subtitle">Scan your fridge and pantry to get started</div>
+      <div style="font-size:12px;color:var(--muted);margin-top:2px" id="kitchen-subtitle">Scan to get started</div>
     </div>
-    <div onclick="startScan()" style="background:var(--teal);color:#fff;border-radius:12px;padding:8px 14px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Fredoka',sans-serif">+ Scan</div>
+    <div onclick="startScanFrom('kitchen')" style="background:var(--teal);color:#fff;border-radius:12px;padding:8px 14px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Fredoka',sans-serif">+ Rescan</div>
   </div>
   <div class="ktabs">
     <div class="ktab active" id="ktab-fridge" onclick="showKitchenTab('fridge')">
@@ -327,14 +329,41 @@ html,body{height:100%;background:#c8ede9;font-family:'Nunito',sans-serif;color:v
       <div class="ktab-count" id="pantry-tab-count">0 items</div>
     </div>
   </div>
-  <div id="kitchen-content" style="margin-top:14px">
+  <div id="kitchen-content" style="margin-top:14px;padding:0 20px">
     <div class="empty-state" id="kitchen-empty">
       <div class="empty-emoji">&#128248;</div>
       <div class="empty-title">Nothing here yet</div>
-      <div class="empty-sub">Tap Scan to photograph your fridge and pantry. Kai will identify everything inside.</div>
-      <button class="bp" onclick="startScan()" style="width:auto;padding:12px 24px">Scan my kitchen</button>
+      <div class="empty-sub">Tap Rescan to photograph your fridge and pantry.</div>
+      <button class="bp" onclick="startScanFrom('kitchen')" style="width:auto;padding:12px 24px">Scan my kitchen</button>
     </div>
-    <div id="kitchen-items" style="display:none;background:var(--card);margin:0 20px;border-radius:18px;border:1px solid var(--border)"></div>
+    <div id="kitchen-items-wrap" style="display:none;background:var(--card);border-radius:18px;border:1px solid var(--border);overflow:hidden">
+      <div id="kitchen-items"></div>
+      <div class="add-item-row">
+        <span style="font-size:16px">+</span>
+        <input class="add-item-input" id="add-item-input" placeholder="Add an item manually..." onkeydown="if(event.key==='Enter')addItemManually()">
+        <button class="add-item-btn" onclick="addItemManually()">Add</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- KOLLECTION -->
+<div id="s-kollection" class="screen">
+<div class="ss">
+  <div style="padding:20px 20px 0;display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+    <div>
+      <div style="font-family:'Fredoka',sans-serif;font-size:24px;font-weight:700;color:var(--txt)">Kollection</div>
+      <div style="font-size:12px;color:var(--muted);margin-top:2px" id="koll-subtitle">Your saved recipes</div>
+    </div>
+    <div onclick="navTo('import')" style="background:var(--teal);color:#fff;border-radius:12px;padding:8px 14px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Fredoka',sans-serif">+ Add</div>
+  </div>
+  <div id="koll-list"></div>
+  <div class="empty-state" id="koll-empty" style="display:none">
+    <div class="empty-emoji">&#128218;</div>
+    <div class="empty-title">No recipes yet</div>
+    <div class="empty-sub">Import a recipe and it will be saved here automatically.</div>
+    <button class="bp" onclick="navTo('import')" style="width:auto;padding:12px 24px">Import a recipe</button>
   </div>
 </div>
 </div>
@@ -343,7 +372,7 @@ html,body{height:100%;background:#c8ede9;font-family:'Nunito',sans-serif;color:v
 <div id="s-import" class="screen">
 <div class="ss">
   <div class="ihead">
-    <div class="bbl" onclick="goTo('s-home')"><svg width="14" height="14" fill="none" stroke="var(--txt)" stroke-width="2.5" viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div class="bbl" onclick="goBack()"><svg width="14" height="14" fill="none" stroke="var(--txt)" stroke-width="2.5" viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     <div><div class="ititle">Import a Recipe</div><div class="isub">Paste a URL or describe the dish</div></div>
   </div>
   <div class="urlbox">
@@ -353,7 +382,7 @@ html,body{height:100%;background:#c8ede9;font-family:'Nunito',sans-serif;color:v
   </div>
   <div class="tipbox">
     <div class="tipicon">*</div>
-    <p class="tiptext"><strong>Kai tip:</strong> Works great with food blogs and recipe sites. For Instagram, copy the recipe text from the caption and paste it below instead.</p>
+    <p class="tiptext"><strong>Kai tip:</strong> Works great with food blogs and recipe sites. For Instagram, copy the caption text and paste it in the box below instead.</p>
   </div>
   <div style="padding:0 20px 10px"><button class="bp" onclick="startExtract()">Extract Recipe with Kai</button></div>
   <div class="ordiv">or paste recipe text / describe a dish</div>
@@ -361,24 +390,26 @@ html,body{height:100%;background:#c8ede9;font-family:'Nunito',sans-serif;color:v
     <textarea id="text-input" placeholder="e.g. Creamy garlic pasta with parmesan, butter, heavy cream..." style="width:100%;background:var(--card);border:2px solid var(--border);border-radius:14px;padding:13px 16px;font-size:13px;font-family:'Nunito',sans-serif;color:var(--txt);outline:none;resize:none;height:90px;transition:border-color .2s" onfocus="this.style.borderColor='var(--teal)'" onblur="this.style.borderColor='var(--border)'"></textarea>
   </div>
   <div style="padding:0 20px 16px"><button class="bp" style="background:var(--lilac)" onclick="startTextExtract()">Generate Recipe from Text</button></div>
-  <div class="ordiv">or jump to a saved recipe</div>
-  <div style="display:flex;flex-wrap:wrap;gap:8px;padding:0 20px 24px">
-    <div class="chip" onclick="loadDemo()">Creamy Garlic Pasta</div>
-    <div class="chip" onclick="loadDemo()">Chicken Tikka</div>
-    <div class="chip" onclick="loadDemo()">Spinach Salad</div>
-  </div>
+  <div class="ordiv">or pick from your Kollection</div>
+  <div id="import-koll-chips" style="display:flex;flex-wrap:wrap;gap:8px;padding:0 20px 24px"></div>
 </div>
 </div>
 
 <!-- EXTRACTING -->
 <div id="s-extracting" class="screen">
-  <div class="espin">*</div>
-  <div class="etitle">Reading your recipe...</div>
-  <div class="esub">Kai is extracting ingredients from the link</div>
-  <div class="esteps">
-    <div class="estep" id="step-1"><div class="edot">1</div><div class="elabel">Fetching recipe page</div></div>
-    <div class="estep" id="step-2"><div class="edot">2</div><div class="elabel">Reading the content</div></div>
-    <div class="estep" id="step-3"><div class="edot">3</div><div class="elabel">Extracting ingredients with Kai</div></div>
+  <div style="padding:16px 20px;display:flex;align-items:center;gap:12px">
+    <div class="bbl" onclick="goBack()"><svg width="14" height="14" fill="none" stroke="var(--txt)" stroke-width="2.5" viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <span style="font-size:13px;color:var(--muted)">Cancel</span>
+  </div>
+  <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px 24px;text-align:center">
+    <div class="espin">*</div>
+    <div class="etitle">Reading your recipe...</div>
+    <div class="esub">Kai is extracting ingredients from the link</div>
+    <div class="esteps">
+      <div class="estep" id="step-1"><div class="edot">1</div><div class="elabel">Fetching recipe page</div></div>
+      <div class="estep" id="step-2"><div class="edot">2</div><div class="elabel">Reading the content</div></div>
+      <div class="estep" id="step-3"><div class="edot">3</div><div class="elabel">Extracting ingredients with Kai</div></div>
+    </div>
   </div>
 </div>
 
@@ -386,31 +417,26 @@ html,body{height:100%;background:#c8ede9;font-family:'Nunito',sans-serif;color:v
 <div id="s-recipe" class="screen">
 <div class="ss">
   <div style="padding:20px 20px 0;display:flex;align-items:center;gap:12px;margin-bottom:4px">
-    <div class="bbl" onclick="goTo('s-import')"><svg width="14" height="14" fill="none" stroke="var(--txt)" stroke-width="2.5" viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div class="bbl" onclick="goBack()"><svg width="14" height="14" fill="none" stroke="var(--txt)" stroke-width="2.5" viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     <span style="font-family:'Fredoka',sans-serif;font-size:16px;font-weight:700;color:var(--txt)">Recipe Found</span>
   </div>
   <div class="rhero">
     <div class="rebox" id="recipe-emoji-box" style="background:#FFF4E6">&#127837;</div>
-    <div><div class="retitle" id="recipe-title">Creamy Garlic Butter Pasta</div><div class="resrc" id="recipe-source">@foodwith_maria on Instagram</div></div>
+    <div style="flex:1"><div class="retitle" id="recipe-title">Creamy Garlic Butter Pasta</div><div class="resrc" id="recipe-source">@foodwith_maria on Instagram</div></div>
   </div>
-  <div class="metarow" id="recipe-meta">
-    <div class="pill" style="background:#FFF4E6;color:#CC7A00">20 min</div>
-    <div class="pill" style="background:#E0FAF8;color:#007A72">Italian</div>
-    <div class="pill" style="background:#F0EEFF;color:#534AB7">Easy</div>
-    <div class="pill" style="background:#E6F3FF;color:#185FA5">Serves 2</div>
-  </div>
+  <div class="metarow" id="recipe-meta"></div>
   <div class="istats">
-    <div class="istat"><div class="istatnum" id="ing-total">9</div><div class="istatlabel">ingredients</div></div>
-    <div class="istat"><div class="istatnum" id="ing-likely" style="color:var(--green)">6</div><div class="istatlabel">likely have</div></div>
-    <div class="istat"><div class="istatnum" id="ing-check" style="color:var(--coral)">3</div><div class="istatlabel">to check</div></div>
+    <div class="istat"><div class="istatnum" id="ing-total">0</div><div class="istatlabel">ingredients</div></div>
+    <div class="istat"><div class="istatnum" id="ing-likely" style="color:var(--green)">0</div><div class="istatlabel">likely have</div></div>
+    <div class="istat"><div class="istatnum" id="ing-check" style="color:var(--coral)">0</div><div class="istatlabel">to check</div></div>
   </div>
   <div style="font-family:'Fredoka',sans-serif;font-size:16px;font-weight:700;color:var(--txt);padding:0 20px;margin-bottom:10px">Ingredients</div>
   <div class="ingcard" id="ing-list"></div>
   <div style="font-family:'Fredoka',sans-serif;font-size:16px;font-weight:700;color:var(--txt);padding:0 20px;margin-bottom:14px;margin-top:4px">How to Cook</div>
   <div id="steps-list"></div>
   <div style="padding:0 20px 28px;display:flex;flex-direction:column;gap:10px;margin-top:8px">
-    <button class="bp" onclick="startScan()">Now scan your kitchen</button>
-    <button class="bo" onclick="goTo('s-home')">Save for later</button>
+    <button class="bp" onclick="startScanFrom('recipe')">Scan my kitchen to match</button>
+    <button class="bo" onclick="goBack()">Back</button>
   </div>
 </div>
 </div>
@@ -419,7 +445,7 @@ html,body{height:100%;background:#c8ede9;font-family:'Nunito',sans-serif;color:v
 <div id="s-scan-fridge" class="screen scanscreen">
   <div class="sambient" style="background:linear-gradient(160deg,rgba(0,194,178,.13),transparent 60%)"></div>
   <div class="stopbar">
-    <div class="bb" onclick="goTo('s-recipe')"><svg width="14" height="14" fill="none" stroke="#fff" stroke-width="2.5" viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div class="bb" onclick="goBack()"><svg width="14" height="14" fill="none" stroke="#fff" stroke-width="2.5" viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     <div class="sphase">Step 1 of 2 - Fridge</div>
     <div class="sskip" onclick="skipFridge()">Skip</div>
   </div>
@@ -498,25 +524,26 @@ html,body{height:100%;background:#c8ede9;font-family:'Nunito',sans-serif;color:v
 <div id="s-match" class="screen">
 <div class="ss">
   <div class="mtopbar">
-    <div class="bbl" onclick="goTo('s-scan-pantry')"><svg width="14" height="14" fill="none" stroke="var(--txt)" stroke-width="2.5" viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-    <div style="flex:1"><div class="mrecname" id="match-recipe-name">Creamy Garlic Pasta</div><div class="mrecsrc" id="match-recipe-source">@foodwith_maria</div></div>
+    <div class="bbl" onclick="goBack()"><svg width="14" height="14" fill="none" stroke="var(--txt)" stroke-width="2.5" viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div style="flex:1"><div class="mrecname" id="match-recipe-name">Recipe Match</div><div class="mrecsrc" id="match-recipe-source"></div></div>
     <div class="mrecicon" id="match-recipe-icon" style="background:#FFF4E6">&#127837;</div>
   </div>
   <div class="vcard cc" id="verdict-card">
     <div class="vemoji" id="verdict-emoji">&#9989;</div>
-    <div><div class="vmain" id="verdict-main">You can make this tonight</div><div class="vsub" id="verdict-sub">You have 7 of 9 ingredients.</div></div>
+    <div><div class="vmain" id="verdict-main">You can make this tonight</div><div class="vsub" id="verdict-sub"></div></div>
   </div>
   <div class="mstats">
-    <div class="mstat"><div class="mstatnum" id="stat-have" style="color:var(--green)">7</div><div class="mstatlabel">you have</div></div>
-    <div class="mstat"><div class="mstatnum" id="stat-miss" style="color:var(--red)">2</div><div class="mstatlabel">missing</div></div>
-    <div class="mstat"><div class="mstatnum" id="stat-total">9</div><div class="mstatlabel">total</div></div>
+    <div class="mstat"><div class="mstatnum" id="stat-have" style="color:var(--green)">0</div><div class="mstatlabel">you have</div></div>
+    <div class="mstat"><div class="mstatnum" id="stat-miss" style="color:var(--red)">0</div><div class="mstatlabel">missing</div></div>
+    <div class="mstat"><div class="mstatnum" id="stat-total">0</div><div class="mstatlabel">total</div></div>
   </div>
   <div class="msec"><div class="msectitle">In your kitchen</div><div id="have-list"></div></div>
   <div class="msec" id="miss-section"><div class="msectitle">You are missing</div><div id="miss-list"></div></div>
-  <div class="kaitip">
+  <div class="kaitip" id="kai-tip-box">
     <div style="font-size:18px;flex-shrink:0">*</div>
-    <div class="kaitiptext" id="kai-tip-text"><strong>Kai says:</strong> You can skip parsley. Sub heavy cream with milk plus a teaspoon of flour.</div>
+    <div class="kaitiptext" id="kai-tip-text"></div>
   </div>
+  <div style="height:20px"></div>
 </div>
 <div class="msticky">
   <button class="cookedbtn" id="cooked-btn" onclick="markCooked()">I cooked this tonight!</button>
@@ -533,8 +560,8 @@ html,body{height:100%;background:#c8ede9;font-family:'Nunito',sans-serif;color:v
     <div class="cstat"><div style="font-size:26px;margin-bottom:8px">&#127807;</div><div class="cstatv">0 waste</div><div class="cstatl">ingredients used up</div></div>
   </div>
   <div style="width:100%;display:flex;flex-direction:column;gap:10px">
-    <button class="bp" onclick="goTo('s-import')">Find another recipe</button>
-    <button class="bo" onclick="goTo('s-kitchen')">View my kitchen</button>
+    <button class="bp" onclick="navTo('import')">Find another recipe</button>
+    <button class="bo" onclick="navTo('kitchen')">View my kitchen</button>
   </div>
 </div>
 
@@ -548,119 +575,117 @@ html,body{height:100%;background:#c8ede9;font-family:'Nunito',sans-serif;color:v
     <div class="navitem-icon">&#10052;</div>
     <div class="navitem-label">Kitchen</div>
   </div>
-  <div class="nav-scan-btn" onclick="startScan()">&#128247;</div>
+  <div class="nav-scan-btn" onclick="startScanFrom('nav')">&#128247;</div>
+  <div class="navitem" id="nav-kollection" onclick="navTo('kollection')">
+    <div class="navitem-icon">&#128218;</div>
+    <div class="navitem-label">Kollection</div>
+  </div>
   <div class="navitem" id="nav-import" onclick="navTo('import')">
     <div class="navitem-icon">&#128279;</div>
     <div class="navitem-label">Import</div>
-  </div>
-  <div class="navitem" id="nav-kollection" onclick="navTo('home')">
-    <div class="navitem-icon">&#128218;</div>
-    <div class="navitem-label">Recipes</div>
   </div>
 </nav>
 
 </div>
 <script>
-var currentRecipe = null;
+// ── STATE ──
 var fridgeItems = [];
 var pantryItems = [];
+var kollection = [];
+var currentRecipe = null;
+var scanOrigin = 'home';
+var navHistory = [];
 var activeKitchenTab = 'fridge';
+var MAX_KOLL = 10;
 
-// Load saved kitchen from localStorage
-function loadKitchen() {
-  var saved = localStorage.getItem('kai_fridge');
-  if (saved) try { fridgeItems = JSON.parse(saved); } catch(e) {}
-  var saved2 = localStorage.getItem('kai_pantry');
-  if (saved2) try { pantryItems = JSON.parse(saved2); } catch(e) {}
-  updateKitchenCounts();
+var FULLSCREEN = ['s-scan-fridge','s-scan-pantry','s-processing','s-cooked','s-extracting'];
+
+// ── STORAGE ──
+function saveAll() {
+  try {
+    localStorage.setItem('kai_fridge', JSON.stringify(fridgeItems));
+    localStorage.setItem('kai_pantry', JSON.stringify(pantryItems));
+    localStorage.setItem('kai_kollection', JSON.stringify(kollection));
+  } catch(e) {}
 }
 
-function saveKitchen() {
-  localStorage.setItem('kai_fridge', JSON.stringify(fridgeItems));
-  localStorage.setItem('kai_pantry', JSON.stringify(pantryItems));
-  updateKitchenCounts();
+function loadAll() {
+  try {
+    var f = localStorage.getItem('kai_fridge');
+    var p = localStorage.getItem('kai_pantry');
+    var k = localStorage.getItem('kai_kollection');
+    if (f) fridgeItems = JSON.parse(f);
+    if (p) pantryItems = JSON.parse(p);
+    if (k) kollection = JSON.parse(k);
+  } catch(e) {}
 }
 
-function updateKitchenCounts() {
-  document.getElementById('fridge-tab-count').textContent = fridgeItems.length + ' items';
-  document.getElementById('pantry-tab-count').textContent = pantryItems.length + ' items';
-  var total = fridgeItems.length + pantryItems.length;
-  document.getElementById('kitchen-subtitle').textContent = total > 0 ? total + ' items across fridge and pantry' : 'Scan your fridge and pantry to get started';
+// ── DUPLICATE CHECK MERGE ──
+function mergeItems(existing, newItems) {
+  var result = existing.slice();
+  newItems.forEach(function(newItem) {
+    var newName = newItem.name.toLowerCase().split(' ')[0];
+    var isDuplicate = result.some(function(ex) {
+      var exName = ex.name.toLowerCase().split(' ')[0];
+      return exName === newName;
+    });
+    if (!isDuplicate) result.push(newItem);
+  });
+  return result;
 }
 
-function showKitchenTab(tab) {
-  activeKitchenTab = tab;
-  document.getElementById('ktab-fridge').classList.toggle('active', tab === 'fridge');
-  document.getElementById('ktab-pantry').classList.toggle('active', tab === 'pantry');
-  renderKitchenItems();
-}
-
-function renderKitchenItems() {
-  var items = activeKitchenTab === 'fridge' ? fridgeItems : pantryItems;
-  var emptyEl = document.getElementById('kitchen-empty');
-  var itemsEl = document.getElementById('kitchen-items');
-  if (items.length === 0) {
-    emptyEl.style.display = 'block';
-    itemsEl.style.display = 'none';
-  } else {
-    emptyEl.style.display = 'none';
-    itemsEl.style.display = 'block';
-    itemsEl.innerHTML = items.map(function(item) {
-      return '<div class="king-row">' +
-        '<div class="king-icon" style="background:' + (activeKitchenTab === 'fridge' ? 'var(--sky-bg)' : 'var(--amber-bg)') + '">' + (item.emoji || '') + '</div>' +
-        '<div><div class="king-name">' + item.name + '</div><div class="king-conf">' + item.conf + '% confidence</div></div>' +
-        '</div>';
-    }).join('');
-  }
-}
-
-var DEMO = {
-  title: 'Creamy Garlic Butter Pasta',
-  emoji: '',
-  source: '@foodwith_maria on Instagram',
-  time: '20 min', cuisine: 'Italian', diff: 'Easy', serves: '2',
-  ingredients: [
-    {emoji:'', name:'Spaghetti', amount:'200g', have:true},
-    {emoji:'', name:'Garlic cloves', amount:'4 cloves', have:true},
-    {emoji:'', name:'Butter', amount:'3 tbsp', have:true},
-    {emoji:'', name:'Parmesan', amount:'50g grated', have:true},
-    {emoji:'', name:'Heavy cream', amount:'100ml', have:false},
-    {emoji:'', name:'Salt', amount:'to taste', have:true},
-    {emoji:'', name:'Black pepper', amount:'to taste', have:true},
-    {emoji:'', name:'Fresh parsley', amount:'handful', have:false},
-    {emoji:'', name:'Pasta water', amount:'half cup', have:true}
-  ],
-  steps: [
-    'Boil a large pot of salted water and cook spaghetti until al dente. Reserve half a cup of pasta water before draining.',
-    'While pasta cooks, melt butter in a large pan over medium heat. Add minced garlic and cook for 2 minutes until fragrant but not browned.',
-    'Pour in the heavy cream and stir to combine. Simmer for 3 minutes until the sauce thickens slightly.',
-    'Add the drained pasta to the pan and toss well to coat. Add a splash of pasta water to loosen the sauce if needed.',
-    'Remove from heat and stir in the grated parmesan. Season generously with black pepper and top with fresh parsley to serve.'
-  ],
-  kaiTip: 'You can skip parsley - it is garnish only. Sub heavy cream with milk plus a teaspoon of flour for a lighter sauce.'
-};
-
-var FULLSCREEN_SCREENS = ['s-scan-fridge', 's-scan-pantry', 's-processing', 's-extracting', 's-cooked'];
-
+// ── NAVIGATION ──
 function goTo(id) {
   document.querySelectorAll('.screen').forEach(function(s) { s.classList.remove('active'); });
   var el = document.getElementById(id);
   if (el) el.classList.add('active');
   var nav = document.getElementById('main-nav');
-  nav.style.display = FULLSCREEN_SCREENS.indexOf(id) !== -1 ? 'none' : 'flex';
+  nav.style.display = FULLSCREEN.indexOf(id) !== -1 ? 'none' : 'flex';
   window.scrollTo(0, 0);
 }
 
 function navTo(tab) {
+  var screenMap = { home:'s-home', kitchen:'s-kitchen', kollection:'s-kollection', import:'s-import' };
+  var id = screenMap[tab] || s-home;
+  navHistory = [id];
   document.querySelectorAll('.navitem').forEach(function(n) { n.classList.remove('active'); });
-  document.getElementById('nav-' + tab).classList.add('active');
-  if (tab === 'kitchen') { renderKitchenItems(); goTo('s-kitchen'); }
-  else if (tab === 'import') goTo('s-import');
-  else goTo('s-home');
+  var navEl = document.getElementById('nav-' + tab);
+  if (navEl) navEl.classList.add('active');
+  if (tab === 'kitchen') { updateKitchenCounts(); renderKitchenItems(); }
+  if (tab === 'kollection') { renderKollection(); }
+  if (tab === 'home') { renderHomeKollection(); }
+  if (tab === 'import') { renderImportChips(); }
+  goTo(id);
 }
 
-function startScan() { goTo('s-scan-fridge'); }
+function pushScreen(id) {
+  navHistory.push(id);
+  goTo(id);
+}
 
+function goBack() {
+  if (navHistory.length > 1) {
+    navHistory.pop();
+    var prev = navHistory[navHistory.length - 1];
+    goTo(prev);
+  } else {
+    navTo('home');
+  }
+}
+
+function startScanFrom(origin) {
+  scanOrigin = origin;
+  var prevScreen = {
+    home: 's-home', kitchen: 's-kitchen', recipe: 's-recipe', nav: 's-home'
+  }[origin] || 's-home';
+  navHistory = [prevScreen, 's-scan-fridge'];
+  document.getElementById('fridge-count').textContent = 'Ready - tap to photograph your fridge';
+  document.getElementById('fridge-chips').innerHTML = '';
+  document.getElementById('vf-fridge').querySelectorAll('.dbubble').forEach(function(b) { b.remove(); });
+  goTo('s-scan-fridge');
+}
+
+// ── TOAST ──
 function showToast(msg, dur) {
   dur = dur || 2500;
   var t = document.getElementById('toast');
@@ -669,49 +694,64 @@ function showToast(msg, dur) {
   setTimeout(function() { t.style.display = 'none'; }, dur);
 }
 
+// ── API ──
 function callApi(endpoint, body) {
   return fetch('/api/' + endpoint, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(body)
   }).then(function(r) {
-    if (!r.ok) throw new Error('API error');
+    if (!r.ok) throw new Error('API error ' + r.status);
     return r.json();
   });
 }
 
+// ── EXTRACT ──
 function startExtract() {
   var url = document.getElementById('url-input').value.trim();
   if (!url) { showToast('Paste a recipe link first'); return; }
-  goTo('s-extracting');
+  navHistory.push('s-extracting');
   runExtractSteps();
+  goTo('s-extracting');
   callApi('extract', { url: url }).then(function(r) {
     currentRecipe = r;
+    saveToKollection(r);
     renderRecipe(r);
+    navHistory = ['s-home', 's-import', 's-recipe'];
     goTo('s-recipe');
   }).catch(function() {
-    showToast('Could not read that link - try pasting the recipe text instead');
+    showToast('Could not read that link - try pasting the recipe text below');
+    navHistory.pop();
     goTo('s-import');
   });
 }
 
 function startTextExtract() {
   var text = document.getElementById('text-input').value.trim();
-  if (!text) { showToast('Type or paste a recipe or dish name first'); return; }
-  goTo('s-extracting');
+  if (!text) { showToast('Type or paste a recipe first'); return; }
+  navHistory.push('s-extracting');
   runExtractSteps();
+  goTo('s-extracting');
   callApi('extract', { text: text }).then(function(r) {
     currentRecipe = r;
+    saveToKollection(r);
     renderRecipe(r);
+    navHistory = ['s-home', 's-import', 's-recipe'];
     goTo('s-recipe');
   }).catch(function() {
     showToast('Could not generate recipe - try again');
+    navHistory.pop();
     goTo('s-import');
   });
 }
 
 function runExtractSteps() {
   var steps = ['step-1', 'step-2', 'step-3'];
+  steps.forEach(function(id, i) {
+    var el = document.getElementById(id);
+    el.classList.remove('active', 'done');
+    el.querySelector('.edot').textContent = i + 1;
+  });
   steps.forEach(function(id, i) {
     setTimeout(function() {
       if (i > 0) {
@@ -724,22 +764,98 @@ function runExtractSteps() {
   });
 }
 
-function loadDemo() {
-  currentRecipe = DEMO;
-  renderRecipe(DEMO);
+// ── KOLLECTION ──
+function saveToKollection(recipe) {
+  var exists = kollection.some(function(r) {
+    return r.title.toLowerCase() === recipe.title.toLowerCase();
+  });
+  if (exists) return;
+  kollection.unshift(recipe);
+  if (kollection.length > MAX_KOLL) kollection = kollection.slice(0, MAX_KOLL);
+  saveAll();
+}
+
+function deleteFromKollection(idx) {
+  kollection.splice(idx, 1);
+  saveAll();
+  renderKollection();
+  renderHomeKollection();
+}
+
+function openRecipeFromKollection(idx) {
+  currentRecipe = kollection[idx];
+  renderRecipe(currentRecipe);
+  navHistory.push('s-recipe');
   goTo('s-recipe');
 }
 
+function renderKollection() {
+  var listEl = document.getElementById('koll-list');
+  var emptyEl = document.getElementById('koll-empty');
+  var sub = document.getElementById('koll-subtitle');
+  sub.textContent = kollection.length + ' of ' + MAX_KOLL + ' recipes saved';
+  if (kollection.length === 0) {
+    listEl.innerHTML = '';
+    emptyEl.style.display = 'block';
+    return;
+  }
+  emptyEl.style.display = 'none';
+  listEl.innerHTML = kollection.map(function(r, i) {
+    return '<div class="koll-row">' +
+      '<div class="koll-emoji" onclick="openRecipeFromKollection(' + i + ')">' + (r.emoji || '&#127837;') + '</div>' +
+      '<div class="koll-meta" onclick="openRecipeFromKollection(' + i + ')">' +
+        '<div class="koll-title">' + r.title + '</div>' +
+        '<div class="koll-sub">' + (r.cuisine || '') + (r.time ? ' · ' + r.time : '') + '</div>' +
+      '</div>' +
+      '<button class="koll-del" onclick="deleteFromKollection(' + i + ')">&#128465;</button>' +
+    '</div>';
+  }).join('');
+}
+
+function renderHomeKollection() {
+  var el = document.getElementById('home-kollection');
+  if (kollection.length === 0) {
+    el.innerHTML = '<div style="padding:16px 20px;font-size:13px;color:var(--muted)">No recipes yet. Import one to get started.</div>';
+    return;
+  }
+  el.innerHTML = kollection.slice(0, 3).map(function(r, i) {
+    return '<div class="rrow" onclick="openRecipeFromKollection(' + i + ')">' +
+      '<div class="remoji" style="background:#FFF4E6">' + (r.emoji || '&#127837;') + '</div>' +
+      '<div class="rmeta"><div class="rtitle">' + r.title + '</div><div class="rsub">' + (r.cuisine || '') + (r.time ? ' · ' + r.time : '') + '</div></div>' +
+      '<div class="mpill" style="background:var(--teal-dim);color:var(--teal)">&#128218;</div>' +
+    '</div>';
+  }).join('');
+}
+
+function renderImportChips() {
+  var el = document.getElementById('import-koll-chips');
+  if (kollection.length === 0) {
+    el.innerHTML = '<div style="font-size:12px;color:var(--muted)">No saved recipes yet.</div>';
+    return;
+  }
+  el.innerHTML = kollection.map(function(r, i) {
+    return '<div class="chip" onclick="openRecipeFromKollection(' + i + ')">' + (r.emoji || '') + ' ' + r.title + '</div>';
+  }).join('');
+}
+
+// ── RECIPE RENDER ──
 function renderRecipe(r) {
   document.getElementById('recipe-title').textContent = r.title;
   document.getElementById('recipe-source').textContent = r.source || 'Recipe';
-  document.getElementById('recipe-emoji-box').textContent = r.emoji || '';
+  document.getElementById('recipe-emoji-box').textContent = r.emoji || '&#127837;';
+  var metaEl = document.getElementById('recipe-meta');
+  metaEl.innerHTML = '';
+  if (r.time) metaEl.innerHTML += '<div class="pill" style="background:#FFF4E6;color:#CC7A00">' + r.time + '</div>';
+  if (r.cuisine) metaEl.innerHTML += '<div class="pill" style="background:#E0FAF8;color:#007A72">' + r.cuisine + '</div>';
+  if (r.diff) metaEl.innerHTML += '<div class="pill" style="background:#F0EEFF;color:#534AB7">' + r.diff + '</div>';
+  if (r.serves) metaEl.innerHTML += '<div class="pill" style="background:#E6F3FF;color:#185FA5">Serves ' + r.serves + '</div>';
   document.getElementById('ing-total').textContent = r.ingredients.length;
   var likely = r.ingredients.filter(function(i) { return i.have; }).length;
   document.getElementById('ing-likely').textContent = likely;
   document.getElementById('ing-check').textContent = r.ingredients.length - likely;
   document.getElementById('ing-list').innerHTML = r.ingredients.map(function(i) {
-    return '<div class="ingrow"><div class="ingbox" style="background:#FFF8F0">' + (i.emoji || '') + '</div><div><div class="ingname">' + i.name + '</div><div class="ingamt">' + i.amount + '</div></div></div>';
+    return '<div class="ingrow"><div class="ingbox" style="background:#FFF8F0">' + (i.emoji || '') + '</div>' +
+      '<div><div class="ingname">' + i.name + '</div><div class="ingamt">' + i.amount + '</div></div></div>';
   }).join('');
   var stepsEl = document.getElementById('steps-list');
   if (r.steps && r.steps.length > 0) {
@@ -747,10 +863,74 @@ function renderRecipe(r) {
       return '<div class="step-row"><div class="step-num">' + (i + 1) + '</div><div class="step-text">' + step + '</div></div>';
     }).join('');
   } else {
-    stepsEl.innerHTML = '<div style="padding:0 20px 16px;font-size:13px;color:var(--muted)">No steps available for this recipe.</div>';
+    stepsEl.innerHTML = '<div style="padding:0 20px 16px;font-size:13px;color:var(--muted)">No steps available.</div>';
   }
 }
 
+// ── KITCHEN ──
+function updateKitchenCounts() {
+  document.getElementById('fridge-tab-count').textContent = fridgeItems.length + ' items';
+  document.getElementById('pantry-tab-count').textContent = pantryItems.length + ' items';
+  var total = fridgeItems.length + pantryItems.length;
+  document.getElementById('kitchen-subtitle').textContent = total > 0 ? total + ' items across fridge and pantry' : 'Scan to get started';
+}
+
+function showKitchenTab(tab) {
+  activeKitchenTab = tab;
+  document.getElementById('ktab-fridge').classList.toggle('active', tab === 'fridge');
+  document.getElementById('ktab-pantry').classList.toggle('active', tab === 'pantry');
+  renderKitchenItems();
+}
+
+function renderKitchenItems() {
+  var items = activeKitchenTab === 'fridge' ? fridgeItems : pantryItems;
+  var emptyEl = document.getElementById('kitchen-empty');
+  var wrapEl = document.getElementById('kitchen-items-wrap');
+  var listEl = document.getElementById('kitchen-items');
+  if (items.length === 0 && fridgeItems.length === 0 && pantryItems.length === 0) {
+    emptyEl.style.display = 'block'; wrapEl.style.display = 'none'; return;
+  }
+  emptyEl.style.display = 'none'; wrapEl.style.display = 'block';
+  var bgColor = activeKitchenTab === 'fridge' ? 'var(--sky-bg)' : 'var(--amber-bg)';
+  listEl.innerHTML = items.map(function(item, i) {
+    return '<div class="king-row">' +
+      '<div class="king-icon" style="background:' + bgColor + '">' + (item.emoji || '') + '</div>' +
+      '<div style="flex:1"><div class="king-name">' + item.name + '</div><div class="king-conf">' + (item.conf || '') + (item.conf ? '% confidence' : 'Added manually') + '</div></div>' +
+      '<button class="king-del" onclick="deleteKitchenItem(' + i + ')">&#128465;</button>' +
+    '</div>';
+  }).join('');
+}
+
+function deleteKitchenItem(idx) {
+  if (activeKitchenTab === 'fridge') fridgeItems.splice(idx, 1);
+  else pantryItems.splice(idx, 1);
+  saveAll();
+  updateKitchenCounts();
+  renderKitchenItems();
+}
+
+function addItemManually() {
+  var input = document.getElementById('add-item-input');
+  var name = input.value.trim();
+  if (!name) return;
+  var newItem = { emoji: '', name: name, conf: null };
+  var isDuplicate = false;
+  if (activeKitchenTab === 'fridge') {
+    isDuplicate = fridgeItems.some(function(i) { return i.name.toLowerCase() === name.toLowerCase(); });
+    if (!isDuplicate) fridgeItems.push(newItem);
+  } else {
+    isDuplicate = pantryItems.some(function(i) { return i.name.toLowerCase() === name.toLowerCase(); });
+    if (!isDuplicate) pantryItems.push(newItem);
+  }
+  if (isDuplicate) { showToast(name + ' is already in your ' + activeKitchenTab); return; }
+  input.value = '';
+  saveAll();
+  updateKitchenCounts();
+  renderKitchenItems();
+  showToast(name + ' added to ' + activeKitchenTab);
+}
+
+// ── SCAN ──
 function toBase64(file) {
   return new Promise(function(res, rej) {
     var rd = new FileReader();
@@ -771,7 +951,8 @@ function addBubble(vf, item, i, isPantry) {
   var b = document.createElement('div');
   b.className = 'dbubble' + (isPantry ? ' pbubble' : '');
   b.style.left = p.x + '%'; b.style.top = p.y + '%';
-  b.innerHTML = '<span style="font-size:14px">' + (item.emoji || '') + '</span><div><div class="bname">' + item.name + '</div><div class="bconf">' + item.conf + '% match</div></div>';
+  b.innerHTML = '<span style="font-size:14px">' + (item.emoji || '') + '</span>' +
+    '<div><div class="bname">' + item.name + '</div><div class="bconf">' + item.conf + '% match</div></div>';
   vf.appendChild(b);
 }
 
@@ -792,18 +973,28 @@ function handleFridgeScan(input) {
   vf.querySelectorAll('.dbubble').forEach(function(b) { b.remove(); });
   toBase64(input.files[0]).then(function(b64) {
     return callApi('scan', { image: b64, location: 'fridge' });
-  }).then(function(items) {
-    if (!Array.isArray(items)) items = items.items || [];
-    fridgeItems = items;
-    saveKitchen();
-    items.forEach(function(item, i) {
+  }).then(function(newItems) {
+    if (!Array.isArray(newItems)) newItems = newItems.items || [];
+    var added = 0;
+    newItems.forEach(function(item) {
+      var isDup = fridgeItems.some(function(ex) {
+        return ex.name.toLowerCase().split(' ')[0] === item.name.toLowerCase().split(' ')[0];
+      });
+      if (!isDup) { fridgeItems.push(item); added++; }
+    });
+    saveAll();
+    newItems.forEach(function(item, i) {
       setTimeout(function() {
         addBubble(vf, item, i, false);
         addChip(chipsEl, item, false);
         countEl.textContent = (i + 1) + ' item' + (i > 0 ? 's' : '') + ' spotted in fridge';
       }, i * 480);
     });
-    setTimeout(function() { goTo('s-scan-pantry'); }, items.length * 480 + 700);
+    setTimeout(function() {
+      if (added < newItems.length) showToast((newItems.length - added) + ' duplicates skipped');
+      navHistory.push('s-scan-pantry');
+      goTo('s-scan-pantry');
+    }, newItems.length * 480 + 700);
   }).catch(function() {
     showToast('Could not read the photo - try again');
     countEl.textContent = 'Ready - tap to photograph your fridge';
@@ -820,11 +1011,17 @@ function handlePantryScan(input) {
   vf.querySelectorAll('.dbubble').forEach(function(b) { b.remove(); });
   toBase64(input.files[0]).then(function(b64) {
     return callApi('scan', { image: b64, location: 'pantry' });
-  }).then(function(items) {
-    if (!Array.isArray(items)) items = items.items || [];
-    pantryItems = items;
-    saveKitchen();
-    items.forEach(function(item, i) {
+  }).then(function(newItems) {
+    if (!Array.isArray(newItems)) newItems = newItems.items || [];
+    var added = 0;
+    newItems.forEach(function(item) {
+      var isDup = pantryItems.some(function(ex) {
+        return ex.name.toLowerCase().split(' ')[0] === item.name.toLowerCase().split(' ')[0];
+      });
+      if (!isDup) { pantryItems.push(item); added++; }
+    });
+    saveAll();
+    newItems.forEach(function(item, i) {
       setTimeout(function() {
         addBubble(vf, item, i, true);
         addChip(chipsEl, item, true);
@@ -832,10 +1029,9 @@ function handlePantryScan(input) {
       }, i * 480);
     });
     setTimeout(function() {
-      goTo('s-processing');
-      updateProcessing();
-      setTimeout(function() { buildMatchScreen(); goTo('s-match'); }, 2200);
-    }, items.length * 480 + 700);
+      if (added < newItems.length) showToast((newItems.length - added) + ' duplicates skipped');
+      goToProcessing();
+    }, newItems.length * 480 + 700);
   }).catch(function() {
     showToast('Could not read the photo - try again');
     countEl.textContent = 'Ready - tap to photograph your pantry';
@@ -843,34 +1039,48 @@ function handlePantryScan(input) {
 }
 
 function skipFridge() {
-  fridgeItems = [];
-  saveKitchen();
+  navHistory.push('s-scan-pantry');
+  document.getElementById('pantry-count').textContent = 'Ready - tap to photograph your pantry';
+  document.getElementById('pantry-chips').innerHTML = '';
+  document.getElementById('vf-pantry').querySelectorAll('.dbubble').forEach(function(b) { b.remove(); });
   goTo('s-scan-pantry');
 }
 
-function skipPantry() {
-  pantryItems = [];
-  saveKitchen();
-  goTo('s-processing');
-  updateProcessing();
-  setTimeout(function() { buildMatchScreen(); goTo('s-match'); }, 2200);
-}
+function skipPantry() { goToProcessing(); }
 
-function updateProcessing() {
+function goToProcessing() {
+  navHistory.push('s-processing');
+  goTo('s-processing');
   document.getElementById('proc-fridge-label').textContent = fridgeItems.length > 0 ? 'Fridge - ' + fridgeItems.length + ' items found' : 'Fridge - skipped';
   document.getElementById('proc-fridge-count').textContent = 'done';
   setTimeout(function() {
     document.getElementById('proc-pantry-label').textContent = pantryItems.length > 0 ? 'Pantry - ' + pantryItems.length + ' items found' : 'Pantry - skipped';
     document.getElementById('proc-pantry-count').textContent = 'done';
   }, 800);
+  setTimeout(function() {
+    if (currentRecipe) {
+      buildMatchScreen();
+      navHistory.push('s-match');
+      goTo('s-match');
+    } else {
+      navHistory.push('s-kitchen');
+      updateKitchenCounts();
+      renderKitchenItems();
+      showKitchenTab('fridge');
+      goTo('s-kitchen');
+      document.getElementById('nav-kitchen').click();
+    }
+  }, 2200);
 }
 
+// ── MATCH ──
 function buildMatchScreen() {
-  var r = currentRecipe || DEMO;
+  var r = currentRecipe;
+  if (!r) return;
   var kitchen = fridgeItems.concat(pantryItems).map(function(i) { return i.name.toLowerCase(); });
   document.getElementById('match-recipe-name').textContent = r.title;
   document.getElementById('match-recipe-source').textContent = r.source || '';
-  document.getElementById('match-recipe-icon').textContent = r.emoji || '';
+  document.getElementById('match-recipe-icon').textContent = r.emoji || '&#127837;';
   var have = []; var miss = [];
   r.ingredients.forEach(function(ing) {
     var n = ing.name.toLowerCase();
@@ -880,10 +1090,14 @@ function buildMatchScreen() {
     if (found) have.push(ing); else miss.push(ing);
   });
   document.getElementById('have-list').innerHTML = have.map(function(i) {
-    return '<div class="ming have"><div class="mingemoji">' + (i.emoji || '') + '</div><div class="mingname">' + i.name + '</div><div class="mingamt">' + i.amount + '</div><span style="color:var(--green)">ok</span></div>';
+    return '<div class="ming have"><div class="mingemoji">' + (i.emoji || '') + '</div>' +
+      '<div class="mingname">' + i.name + '</div><div class="mingamt">' + i.amount + '</div>' +
+      '<span style="color:var(--green)">&#10003;</span></div>';
   }).join('');
   document.getElementById('miss-list').innerHTML = miss.map(function(i) {
-    return '<div class="ming miss"><div class="mingemoji">' + (i.emoji || '') + '</div><div class="mingname">' + i.name + '</div><div class="mingamt">' + i.amount + '</div><span style="color:var(--red)">x</span></div>';
+    return '<div class="ming miss"><div class="mingemoji">' + (i.emoji || '') + '</div>' +
+      '<div class="mingname">' + i.name + '</div><div class="mingamt">' + i.amount + '</div>' +
+      '<span style="color:var(--red)">x</span></div>';
   }).join('');
   document.getElementById('stat-have').textContent = have.length;
   document.getElementById('stat-miss').textContent = miss.length;
@@ -893,6 +1107,7 @@ function buildMatchScreen() {
   var vs = document.getElementById('verdict-sub');
   var ve = document.getElementById('verdict-emoji');
   var ms = document.getElementById('miss-section');
+  var tipBox = document.getElementById('kai-tip-box');
   if (miss.length === 0) {
     vc.className = 'vcard cc'; ve.innerHTML = '&#9989;';
     vm.textContent = 'You can make this right now!';
@@ -909,22 +1124,35 @@ function buildMatchScreen() {
     vs.textContent = 'You have ' + have.length + ' of ' + r.ingredients.length + ' ingredients.';
     ms.style.display = 'block';
   }
-  if (r.kaiTip) document.getElementById('kai-tip-text').innerHTML = '<strong>Kai says:</strong> ' + r.kaiTip;
+  if (r.kaiTip) {
+    tipBox.style.display = 'flex';
+    document.getElementById('kai-tip-text').innerHTML = '<strong>Kai says:</strong> ' + r.kaiTip;
+  } else {
+    tipBox.style.display = 'none';
+  }
+  document.getElementById('cooked-btn').classList.remove('done');
+  document.getElementById('cooked-btn').textContent = 'I cooked this tonight!';
 }
 
 function markCooked() {
   var btn = document.getElementById('cooked-btn');
   btn.classList.add('done');
   btn.textContent = 'Amazing! Well done.';
-  setTimeout(function() { goTo('s-cooked'); }, 900);
+  setTimeout(function() {
+    navHistory = ['s-cooked'];
+    goTo('s-cooked');
+  }, 900);
 }
 
+// ── INIT ──
 window.addEventListener('load', function() {
-  loadKitchen();
+  loadAll();
+  navHistory = ['s-home'];
   setTimeout(function() {
     document.getElementById('loading').style.display = 'none';
-    goTo('s-home');
-  }, 1500);
+    renderHomeKollection();
+    navTo('home');
+  }, 1400);
 });
 </script>
 </body>
